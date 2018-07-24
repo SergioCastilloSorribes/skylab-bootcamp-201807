@@ -1,5 +1,5 @@
 var logic = {
-    token: 'BQBJTnUCLyeVUnPs7pGXY7HqxXO_ibfeyw992oV5qqnULHRUv8J5-UFlWleTYQ547ZbV4snSGkiiOHMsYL3Xq7HYnKqqJ-z1E0Qx-_5dxfIFOrG1T-qhrhAjTVO92Te5lGGnsR2G19BpFg',
+    token: 'BQBc0X3ZNpt0CyZNOem28PCSAtIl0-OdnnJ1N3zUubfIewEOzG9_PnHIT0nzXf9GS8o3pR2qcfsXhSWM388oriPANPGw6HVIvijhiu7V-8mnSvtCr5EzNWdbuRvqhcOEB6OmH0DcPqeZ6g',
 
     _callApi: function (path) {
         return $.ajax('https://api.spotify.com/v1' + path, {
