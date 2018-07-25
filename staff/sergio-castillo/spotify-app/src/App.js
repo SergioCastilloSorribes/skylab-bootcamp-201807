@@ -8,6 +8,7 @@ import Login from './components/Login'
 import GoToLogin from './components/GoToLogin'
 import Main from './components/Main'
 import Logout from './components/Logout'
+import AlertError from './components/AlertError';
 
 logic.spotifyToken = 'BQCX1Sgb2R-wqiZpWwL555uhHLBgSelTOkFHdGm_NgjAnltOcvXQ53ORf10EFlnH2lnOY0Ukxc7descjJ1TBCukqpHxiSaVnHs4W_gfVAASx_U38Ufcfgtv0UHXinf8HFDPRnkUaZVaw'
 
@@ -16,7 +17,8 @@ class App extends Component {
     registerActive: false,
     loginActive: false,
     goToLoginActive: false,
-    loggedIn: logic.loggedIn
+    loggedIn: logic.loggedIn,
+    errorAlert: false
   }
 
   goToRegister = () => this.setState({ registerActive: true })
@@ -26,17 +28,34 @@ class App extends Component {
   registerUser = (username, password) =>
     logic.registerUser(username, password)
       .then(() => this.setState({ goToLoginActive: true, registerActive: false }))
-      .catch(console.error)
+      .catch((err)=> {
+        this.setState({errorAlert: err.message})
+        
+      })
 
   loginUser = (username, password) =>
     logic.loginUser(username, password)
-      .then(() => this.setState({ loggedIn: true, loginActive: false }))
-      .catch(console.error)
+      .then(() => this.setState({ loggedIn: true, loginActive: false, errorAlert: false }))
+      .catch((err)=> {
+        this.setState({errorAlert: err.message})
+        
+      })
 
-  goToLogin = () => this.setState({ loginActive: true, goToLoginActive: false })
+  goToLogin = () => {
+    this.setState({ loginActive: true, goToLoginActive: false })
+  }
+
+  onLogout = () => {
+    this.setState({loggedIn:false})
+    logic.logout()
+  }
+
+  errorAlert = () =>{
+    this.setState.errorAlert=true
+  }
 
   render() {
-    const { state: { registerActive, loginActive, goToLoginActive, loggedIn } } = this
+    const { state: { registerActive, loginActive, goToLoginActive, loggedIn, errorAlert } } = this
 
     return (
       <div className="App">
@@ -53,9 +72,10 @@ class App extends Component {
 
         {goToLoginActive && <GoToLogin onLogin={this.goToLogin} />}
 
-        {loggedIn && <Logout />}
+        {loggedIn && <Logout onLogout={this.onLogout}/>}
         {loggedIn && <Main />}
         
+        {errorAlert && <AlertError Alert={errorAlert}/>}
       </div>
     )
   }

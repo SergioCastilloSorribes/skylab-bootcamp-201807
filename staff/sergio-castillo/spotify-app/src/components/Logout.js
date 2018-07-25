@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Logout() {
+function Logout (props) {
     return <section>
-        <button onClick="logic.logout">Logout</button>
+        <button onClick={props.onLogout}>Logout</button>
     </section>
 }
 
