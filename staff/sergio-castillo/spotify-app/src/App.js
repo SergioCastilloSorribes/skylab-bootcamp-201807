@@ -7,17 +7,16 @@ import Register from './components/Register'
 import Login from './components/Login'
 import GoToLogin from './components/GoToLogin'
 import Main from './components/Main'
-import Update from './components/Update'
+import Logout from './components/Logout'
 
-
-logic.spotifyToken = 'BQBm_GETQ3EfQdm4ec3M5mNh578ypueiMtnfWzS9cH4Q-HbMj8Ikk_ir_2dyNhBJROWjStCQCtrRNqsOLHCnOUqGhUtPAa_bWCPoFtyKuKXglzTLBgKRPijDfHndmozl15lJK_HaOdLI9g'
+logic.spotifyToken = 'BQCX1Sgb2R-wqiZpWwL555uhHLBgSelTOkFHdGm_NgjAnltOcvXQ53ORf10EFlnH2lnOY0Ukxc7descjJ1TBCukqpHxiSaVnHs4W_gfVAASx_U38Ufcfgtv0UHXinf8HFDPRnkUaZVaw'
 
 class App extends Component {
   state = {
     registerActive: false,
     loginActive: false,
     goToLoginActive: false,
-    loggedIn: false
+    loggedIn: logic.loggedIn
   }
 
   goToRegister = () => this.setState({ registerActive: true })
@@ -35,8 +34,6 @@ class App extends Component {
       .catch(console.error)
 
   goToLogin = () => this.setState({ loginActive: true, goToLoginActive: false })
-
-  
 
   render() {
     const { state: { registerActive, loginActive, goToLoginActive, loggedIn } } = this
@@ -56,8 +53,9 @@ class App extends Component {
 
         {goToLoginActive && <GoToLogin onLogin={this.goToLogin} />}
 
-        {loggedIn && <Update />}
+        {loggedIn && <Logout />}
         {loggedIn && <Main />}
+        
       </div>
     )
   }
