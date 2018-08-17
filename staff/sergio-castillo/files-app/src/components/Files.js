@@ -60,7 +60,7 @@ class Files extends Component {
         return <main>
             <div className="screen">
                 <nav>
-                    &gt; <a href={`/#/user/${this.props.username}/profile`}>profile</a> <a href="/">logout</a> <span className="blink">_</span>
+                    &gt; <a href="/profile">profile</a> <a href="" onClick={this.props.onLogout}>logout</a> <span className="blink">_</span>
                     <img className="image" src="./default-image.png" alt="" />
                 </nav>
                 {
@@ -78,7 +78,7 @@ class Files extends Component {
                     <label htmlFor="upload">Choose a file</label>
                 </button>
                 <form onSubmit={this.onUpload}>
-                    <input id="upload" type="file" name="upload" placeholder onChange={this.onFileChanged} />
+                    <input id="upload" type="file" name="upload" placeholder autofocus onChange={this.onFileChanged} />
                     <button type="submit">upload</button>
                 </form>
             </div>
