@@ -13,78 +13,63 @@ const jsonBodyParser = bodyParser.json()
 
 router.post('/register', jsonBodyParser, (req, res) => {
     const { body: { username, password } } = req
-
-    try {
-        logic.register(username, password)
-
-        res.status(201).json({ message: 'user registered' })
-    } catch (err) {
-        const { message } = err
-
-        res.status(err instanceof LogicError? 400 : 500).json({ message })
-    }
+    logic.register(username, password)
+        .then (res => res.status(201).json({ message: 'user registered' }))
+        .catch (err => {
+            const { message } = err
+            return res.status(err instanceof LogicError? 401 : 500).json({ message })
+        })
 })
 
 router.post('/authenticate', jsonBodyParser, (req, res) => {
     const { body: { username, password } } = req
 
-    try {
-        logic.authenticate(username, password)
-
-        const { JWT_SECRET, JWT_EXP } = process.env
-
-        const token = jwt.sign({ sub: username }, JWT_SECRET, { expiresIn: JWT_EXP })
-
-        res.status(200).json({ message: 'user authenticated', token })
-    } catch (err) {
-        const { message } = err
-
-        res.status(err instanceof LogicError? 401 : 500).json({ message })
-    }
+    logic.authenticate(username, password)
+        .then (res => {
+            const { JWT_SECRET, JWT_EXP } = process.env
+            const token = jwt.sign({ sub: username }, JWT_SECRET, { expiresIn: JWT_EXP })
+            return res.status(200).json({ message: 'user authenticated', token })
+        })
+        .catch (err => {
+            const { message } = err
+            return res.status(err instanceof LogicError? 401 : 500).json({ message })
+        })
 })
 
 router.patch('/user/:username', [validateJwt, jsonBodyParser], (req, res) => {
     const { params: { username }, body: { password, newPassword } } = req
-
-    try {
-        logic.updatePassword(username, password, newPassword)
-
-        res.status(200).json({ message: 'user updated' })
-    } catch (err) {
-        const { message } = err
-
-        res.status(err instanceof LogicError? 400 : 500).json({ message })
-    }
+    logic.updatePassword(username, password, newPassword)
+        .then(res => res.status(200).json({ message: 'user updated' }))
+        .catch (err => {
+            const { message } = err
+            return res.status(err instanceof LogicError? 400 : 500).json({ message })
+        })
 })
 
 router.get('/user/:username/files', validateJwt, (req, res) => {
-    const { params: { username } } = req
+        const { params: { username } } = req
+        logic.listFiles(username)
+            .then (res => res.json.bind(res))
+            .catch (err => {
+                const { message } = err
+                return res.status(err instanceof LogicError? 400 : 500).json({ message })
+            })
+    })
 
-    try {
-        const files = logic.listFiles(username)
-
-        res.json(files)
-    } catch (err) {
-        const { message } = err
-
-        res.status(err instanceof LogicError? 400 : 500).json({ message })
-    }
-})
 
 router.post('/user/:username/files', [validateJwt, fileUpload()], (req, res) => {
     const { params: { username }, files: { upload } } = req
 
-    if (upload) {
-        try {
+    if (upload)
             logic.saveFile(username, upload.name, upload.data)
-
-            res.status(201).json({ message: 'file saved' })
-        } catch (err) {
-            const { message } = err
-    
-            res.status(err instanceof LogicError? 400 : 500).json({ message })
-        }
-    } else
+                .then (()=>  res.status(201).json({ message: 'file saved' }))
+                .catch (err=> {
+                    const { message } = err
+                    res.status(err instanceof LogicError? 400 : 500).json({ message })
+       
+                })
+    else    
+        
         res.status(418).json({ message: 'no file received' })
 
 })
@@ -102,15 +87,12 @@ router.get('/user/:username/files/:file', validateJwt, (req, res) => {
 router.delete('/user/:username/files/:file', validateJwt, (req, res) => {
     const { params: { username, file } } = req
 
-    try {
         logic.removeFile(username, file)
-
-        res.status(200).json({ message: 'file deleted' })
-    } catch (err) {
-        const { message } = err
-
-        res.status(err instanceof LogicError? 400 : 500).json({ message })
-    }
+            .then (()=> res.status(200).json({ message: 'file deleted' }))
+            .catch (err => {
+                const { message } = err
+                res.status(err instanceof LogicError? 400 : 500).json({ message })
+            })
 })
 
 module.exports = function(db) {
