@@ -396,10 +396,10 @@ router.put('/user/:id/tournament/:tournamentId/createnewround', [validateJwt, js
 // List all the matches
 
 router.get('/user/:id/tournament/:tournamentId/listmatches', [validateJwt, jsonBodyParser], (req, res) => {
-    const { params: { id } } = req
+    const { params: { id, tournamentId } } = req
 
     logic.listMatches(id, tournamentId)
-        .then(matches => res.json({ message: 'List all matches correctly', matches }))
+        .then(matchData => res.json({ message: 'List all matches correctly', matchData }))
         .catch(err => {
             const { message } = err
             res.status(err instanceof LogicError ? 400 : 500).json({ message })

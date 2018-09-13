@@ -5,6 +5,7 @@ import AddTeamToTournament from './tournament/AddTeamToTournament'
 import Winner from './tournament/Winner'
 import logic from '../logic'
 import Feedback from './Feedback'
+import Matches from './tournament/Matches'
 
 
 class Tournament extends Component {
@@ -38,9 +39,10 @@ class Tournament extends Component {
 
     handleCreateNewRound = () => {
         logic.createNewRound(this.state.id, this.state.token, this.state.tournamentId)
-            .then(matches => {
-                debugger
-            })
+    }
+
+    handleListMatches = () => {
+        return logic.listMatches(this.state.id, this.state.token, this.state.tournamentId)
     }
 
     render() {
@@ -51,6 +53,7 @@ class Tournament extends Component {
             {this.state.tournament.state==='creating' && <AddTeamToTournament />}
             {this.state.tournament.state==='creating' && <button type="submit" onClick={this.handleStartTournament}>Start Tournament</button>}
             {this.state.tournament.state==='playing' && this.state.tournament.roundMatches===0 && <button type="submit" onClick={this.handleCreateNewRound}>Create New Round</button>}
+             <Matches handleListMatches={this.handleListMatches}/>
             {this.state.winners.length===1 && <Winner winner={this.state.winners}/>}
         </div>
     }

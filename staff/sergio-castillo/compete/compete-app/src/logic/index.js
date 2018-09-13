@@ -445,7 +445,20 @@ const logic = {
                     .then(res => res.json())
                     .then(res => res)
             })
-    }
+    },
+
+    listMatches(id, token, tournamentId) {
+        return Promise.resolve()
+            .then(() => {
+                this._validateIdField(id)
+
+                return this._call(`user/${id}/tournament/${tournamentId}/listmatches`, 'get',
+                    { authorization: `bearer ${token}`, 'content-type': 'application/json' }
+                    , undefined, 200)
+                    .then(res => res.json())
+                    .then(res => res)
+            })
+    },
 
 }
 
