@@ -105,9 +105,9 @@ router.post('/user/:id/addroleplayer', [validateJwt, jsonBodyParser], (req, res)
 // Retrieve the player data
 
 router.get('/user/:id/retrieveplayer', [validateJwt, jsonBodyParser], (req, res) => {
-    const { params: { id } } = req
+    const { params: { id, playerid } } = req
 
-    logic.retrievePlayer(id, playerid)
+    logic.retrievePlayer(id)
         .then(user => res.json({ message: 'Retrieve user correctly', user }))
         .catch(err => {
             const { message } = err
@@ -263,8 +263,6 @@ router.delete('/user/:id/team/:teamid/remove', [validateJwt, jsonBodyParser], (r
         })
 })
 
-
-
 // Create a new tournament on database TOURNAMENT with an user id
 
 router.post('/user/:id/createtournament', [validateJwt, jsonBodyParser], (req, res) => {
@@ -395,39 +393,26 @@ router.put('/user/:id/tournament/:tournamentId/createnewround', [validateJwt, js
         })
 })
 
-// Retrieve match
+// List all the matches
 
-router.get('/user/:id/tournament/:tournamentId/match/:matchId/retrieve', [validateJwt, jsonBodyParser], (req, res) => {
-    const { params: { id, matchId } } = req
-    debugger
-    logic.retrieveMatch(id, matchId)
-        .then(match => res.json({ message: 'Retrieve match data correctly' }, match))
+router.get('/user/:id/tournament/:tournamentId/listmatches', [validateJwt, jsonBodyParser], (req, res) => {
+    const { params: { id } } = req
+
+    logic.listMatches(id, tournamentId)
+        .then(matches => res.json({ message: 'List all matches correctly', matches }))
         .catch(err => {
             const { message } = err
             res.status(err instanceof LogicError ? 400 : 500).json({ message })
         })
 })
 
-// Add Result
+// Add a result
 
 router.post('/user/:id/tournament/:tournamentId/match/:matchId/addresult', [validateJwt, jsonBodyParser], (req, res) => {
     const { params: { id, tournamentId, matchId }, body: { goalsFirstTeam, goalsSecondTeam } } = req
 
     logic.addResult(id, tournamentId, matchId, goalsFirstTeam, goalsSecondTeam)
-        .then(() => res.json({ message: 'Result added' }))
-        .catch(err => {
-            const { message } = err
-            res.status(err instanceof LogicError ? 400 : 500).json({ message })
-        })
-})
-
-// List matches
-
-router.get('/user/:id/tournament/:tournamentId/listmatches', [validateJwt, jsonBodyParser], (req, res) => {
-    const { params: { id, tournamentId } } = req
-    debugger
-    logic.listMatches(id, tournamentId)
-        .then(matches => res.json({ message: 'Retrieve matches correctly' }, matches))
+        .then(() => res.json({ message: 'Result added correctly' }))
         .catch(err => {
             const { message } = err
             res.status(err instanceof LogicError ? 400 : 500).json({ message })

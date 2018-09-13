@@ -10,7 +10,7 @@ import Tournament from './components/Tournament'
 import Team from './components/Team'
 import Profile from './components/Profile'
 import './App.css';
-import Navbar from './components/Navbar'
+import Navbar from './components/navbar/Navbar'
 
 
 class App extends Component {
