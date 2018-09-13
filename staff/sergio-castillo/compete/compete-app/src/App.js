@@ -102,10 +102,6 @@ class App extends Component {
         <div className="col-2 flexbox App__header__item App__header__item__left">
           <Link to="/home" onClick={this.onResetMessage}> <p className="App__header__nav__item">C</p></Link>
         </div>
-        <div className="col-3">
-          <p className="App__header__nav__item">Compete</p>
-          <p>Organize your tournaments</p>
-        </div>
         <nav className="col-3 App__header__nav">
           {this.isLoggedIn() && <ul className="App__header__nav__ul">
             <li className="App__header__item">

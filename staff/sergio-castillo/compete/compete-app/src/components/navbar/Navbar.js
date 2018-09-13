@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Route, withRouter, Link, Redirect, Switch } from 'react-router-dom'
 
 class Navbar extends Component {
 
     render() {
         return <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">
+                <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
+                Compete
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
