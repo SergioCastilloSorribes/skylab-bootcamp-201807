@@ -11,6 +11,7 @@ import Team from './components/Team'
 import Profile from './components/Profile'
 import './App.css';
 import Navbar from './components/navbar/Navbar'
+import Nav from './components/nav'
 
 
 class App extends Component {
@@ -113,6 +114,7 @@ class App extends Component {
         </nav>
       </header>
       <div>
+        <Nav />
         {this.isLoggedIn() && <button onClick={this.handlePlayer}>Player</button>}
         {this.isLoggedIn() && <button onClick={this.handleManager}>Manager</button>}
         {this.isLoggedIn() && <button onClick={this.handleOrganizer}>Organizer</button>}

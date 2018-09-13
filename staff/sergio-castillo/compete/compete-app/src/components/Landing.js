@@ -60,6 +60,32 @@ class Landing extends Component {
                 <button type="submit">Create a new account</button>
             </form>
             {this.state.feedbackReg && <Feedback message={this.state.feedbackReg} />}
+            <div className="container">
+            <div className="row">
+                <div className="col-3"></div>
+                <div className="col-6 borderBox">
+                    <h4>Register</h4>
+                    <form onSubmit={this.onRegisterSubmitted}>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Name</label>
+                            <input type="name" className="form-control" placeholder="Enter name" onChange={this.onNameChanged} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Email address</label>
+                            <input type="email" className="form-control" placeholder="Enter email" onChange={this.onEmailChanged} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputPassword1">Password</label>
+                            <input type="password" className="form-control" placeholder="Password" onChange={this.onPasswordChanged} />
+                            <small className="form-text text-muted">The password must be more than 6 characters</small>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div className="col-3"></div>
+            </div>
+      </div>
+        
         </div>
     }
 }
