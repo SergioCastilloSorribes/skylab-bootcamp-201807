@@ -5,13 +5,11 @@ class Home extends Component {
     state = {
         id: sessionStorage.getItem('id') || '',
         token: sessionStorage.getItem('token') || '',
-        role:[]
+        role: []
     }
 
     render() {
-        return <div>
-          <p>HOME</p>
-        </div>
+        return <div></div>
     }
 
 }

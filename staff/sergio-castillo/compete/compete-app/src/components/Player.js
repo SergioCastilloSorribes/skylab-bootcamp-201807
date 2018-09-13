@@ -80,12 +80,11 @@ class Player extends Component {
 
     render() {
         return <div>
-            <h1>User</h1>
             {!this.isPlayerIn() && <AddPlayer handleAddPlayer={this.handleAddPlayer} />}
             {!this.isPlayerIn() && <Feedback message={this.state.feedbackAddPlayer} />}
             {this.isPlayerIn() && <PlayerData handleRetrievePlayer={this.handleRetrievePlayer} />}
             {this.isPlayerIn() &&  <ListMyTeamsAsPlayer handleListMyTeamsAsPlayer={this.handleListMyTeamsAsPlayer} handleGoToTeam={this.handleGoToTeam} />}
-            {this.isPlayerIn() && <a href="" onClick={this.handleRemovePlayer}>Remove user as a player</a>}
+            {this.isPlayerIn() && <button onClick={this.handleRemovePlayer} className="btn btn-primary">Remove user as a player</button>}
             {this.isPlayerIn() && <Feedback message={this.state.feedbackRemoveRole} />}
         </div>
     }

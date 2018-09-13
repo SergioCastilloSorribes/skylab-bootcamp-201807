@@ -1,7 +1,8 @@
 const fetch = require('isomorphic-fetch')
 
 const logic = {
-    url: 'http://localhost:8080/api',
+    // url: 'http://localhost:8080/api',
+    url: 'https://competeapi.herokuapp.com/api',
 
     _call(path, method, headers, body, expectedStatus) {
         const config = { method }

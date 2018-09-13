@@ -21,7 +21,7 @@ class PlayerData extends Component {
     render() {
 
         return <div>
-            <h1>Ficha del Jugador</h1>
+            <h3>Ficha del Jugador</h3>
             <ul>
                 <li><img src='https://res.cloudinary.com/sergiocastillo/image/upload/v1536401305/Compete/26622.jpg' height='100px' weight='100px'/></li>
                 <li>{this.state.user.dni}</li>

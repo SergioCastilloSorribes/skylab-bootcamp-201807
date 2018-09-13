@@ -18,6 +18,7 @@ class Tournament extends Component {
         tournamentId: sessionStorage.getItem('tournamentId'),
         role: sessionStorage.getItem('role'),
         tournament: [],
+        teams:[],
         matches: [],
         winners: []
     }
@@ -47,7 +48,7 @@ class Tournament extends Component {
 
     render() {
         return <div>
-            <h4>{this.state.tournament.nameTournament}</h4>
+            <h3>{this.state.tournament.nameTournament}</h3>
             <p>State: {this.state.tournament.state}</p>
             {this.state.tournament.state==='creating' && <TeamsList handleListTeamsFromTournament={this.handleListTeamsFromTournament} />}
             {this.state.tournament.state==='creating' && <AddTeamToTournament />}

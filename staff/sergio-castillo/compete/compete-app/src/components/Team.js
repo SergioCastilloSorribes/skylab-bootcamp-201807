@@ -15,8 +15,10 @@ class Team extends Component {
         organizer: sessionStorage.getItem('organizer'),
         role: sessionStorage.getItem('role'),
         teamId: sessionStorage.getItem('teamId'),
+        feedbackretrieve:undefined,
         team: [],
-        squad: []
+        players:[],
+        res:[]
     }
 
     componentDidMount() {
@@ -24,24 +26,49 @@ class Team extends Component {
             .then(team => {
                 this.setState({ team })
             })
-    }
-
-    componentWillUnmount() {
-        sessionStorage.removeItem('role', "")
-        sessionStorage.removeItem('teamId', "")
+            .catch(({message}) => this.setState({feedbackretrieve: message}))
     }
 
     handleListPlayersFromTeam = () => {
         return logic.listPlayersFromTeam(this.state.id, this.state.token, this.state.teamId)
+            .then(players => {
+                this.setState({players})
+                return players
+            })
+    }
+
+    handleAddPlayerToTeam = ( playerId) => {
+        logic.addPlayerToTeam(this.state.id, this.state.token, this.state.teamId, playerId)
+            .then(res=> {
+                this.setState({res})
+                this.handleListPlayersFromTeam()
+                return true
+            })
     }
 
     render() {
-        return <div>
+
+       return <div className="container">
+            <div className="row">
+            <div className="col-3"></div>
+            <div className="col-6">
             <h3>{this.state.team.name}</h3>
-            <p>{this.state.team.description}</p>
+            <span>{this.state.team.description}</span>
+            <AddPlayerToTeam handleAddPlayerToTeam={this.handleAddPlayerToTeam}/>
             <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
-            <AddPlayerToTeam />
+            </div>
+            <div className="col-3"></div>
+            </div>
         </div>
+
+
+        // return <div>
+        //     {this.state.feedbackretrieve && <Feedback message={this.state.feedbackretrieve}/>}
+        //     <h3>{this.state.team.name}</h3>
+        //     {this.state.team.description}
+        //     <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
+        //     <AddPlayerToTeam />
+        // </div>
     }
 }
 export default withRouter(Team)

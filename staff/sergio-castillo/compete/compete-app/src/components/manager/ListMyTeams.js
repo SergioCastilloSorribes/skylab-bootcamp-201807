@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import logic from '../../logic'
+import './ListMyTeams.css'
 
 class ListMyTeams extends Component {
 
@@ -19,10 +19,19 @@ class ListMyTeams extends Component {
                     teams
                 })
             })
-
     }
 
-    removeTeam = (teamid) => {
+    componentWillReceiveProps() {
+        this.props.handleListMyTeamsAsManager()
+            .then(teams => {
+                this.setState({
+                    teams
+                })
+            })
+    }
+
+    removeTeam = (e,teamid) => {
+        e.preventDefault()
         this.props.handleRemoveTeam(teamid)
             .then(() => {
                 this.setState({
@@ -45,9 +54,17 @@ class ListMyTeams extends Component {
 
     render() {
 
-        return <div>
-            <h1>LIST MY TEAMS</h1>
-            {this.state.teams.map(team => <li key={team._id}><a href="" onClick={(e) => this.handleGoToTeam(e, team._id)}>{team.name}</a>  <a href="" onClick={(e) => { e.preventDefault(); this.removeTeam(team.id) }} >[x]</a></li>)}
+        return <div className="container">
+            <div className="row">
+            <div className="col-3"></div>
+            <div className="col-6">
+                <h3>MY TEAMS AS MANAGER</h3>
+                {this.state.teams.map(team =><div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{team.name}</a><button className="btn btn-danger" onClick={(e)=>this.removeTeam(e,team._id)}>x</button></div>
+                )}
+                
+                </div>
+                <div className="col-3"></div>
+            </div>
         </div>
     }
 }

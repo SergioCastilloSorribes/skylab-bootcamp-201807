@@ -11,12 +11,12 @@ class AddPlayer extends Component {
         name: "",
         surname: "",
         age: "",
-        gender: "",
+        gender: "male",
         height: "",
         weight: "",
         position: "",
         squadnumber: "",
-        photo: ""
+        photo: "" || 'http://www.google.es'
     }
 
     handleChange = (e) => {
@@ -37,40 +37,84 @@ class AddPlayer extends Component {
     }
 
     render() {
-        return <div>
-            <h1>ADD PLAYER</h1>
-            <form onSubmit={this.handleSubmit}>
-                <input type="string" onChange={this.handleChange} name="dni" placeholder="Introduce your dni" />
-                <input type="string" onChange={this.handleChange} name="name" placeholder="Introduce your name" />
-                <input type="string" onChange={this.handleChange} name="surname" placeholder="Introduce your surname" />
-                <input type="number" onChange={this.handleChange} name="age" placeholder="Introduce your age" />
-                <input type="radio" onChange={this.handleChange} name="gender" value="male" /><p>Male</p>
-                <input type="radio" onChange={this.handleChange} name="gender" value="female" /><p>Female</p>
-                <input type="radio" onChange={this.handleChange} name="gender" value="other" /> <p>Other</p>
-                <input type="number" onChange={this.handleChange} name="height" placeholder="Introduce your height" />
-                <input type="number" onChange={this.handleChange} name="weight" placeholder="Introduce your weight" />
-                <input type="string" onChange={this.handleChange} name="position" placeholder="Introduce your position" />
-                <input type="number" onChange={this.handleChange} name="squadnumber" placeholder="Introduce your squad number" />
-                <input type="url" onChange={this.handleChange} name="photo" placeholder="Introduce your photo url" />
-                <button type="submit">Add</button>
-            </form>
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        return <div className="container">
+            <div className="row">
+                <div className="col-2"></div>
+                <div className="col-3">
+                    <h3>ADD PLAYER</h3>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label className="text-color" for="exampleFormControlInput1">Dni</label>
+                            <input autofocus type="string" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="dni" placeholder="Introduce your dni" />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-color" for="exampleFormControlInput1">Name</label>
+                            <input type="string" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="name" placeholder="Introduce your name" />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-color" for="exampleFormControlInput1">Surname</label>
+                            <input type="string" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="surname" placeholder="Introduce your surname" />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-color" for="exampleFormControlInput1">Age</label>
+                            <input type="number" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="age" placeholder="Introduce your age" />
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" onChange={this.handleChange} type="radio" name="gender" id="exampleRadios1" value="male" checked />
+                            <label className="form-check-label" for="exampleRadios1">
+                                Male
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" onChange={this.handleChange} type="radio" name="gender" id="exampleRadios2" value="female" />
+                            <label className="form-check-label" for="exampleRadios2">
+                                Female
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" onChange={this.handleChange} type="radio" name="gender" id="exampleRadios3" value="other" disabled />
+                            <label className="form-check-label" for="exampleRadios3">
+                                Other
+                            </label>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <div className="col-2"></div>
+                <div className="col-3">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label className="text-color" for="exampleFormControlInput1">Height</label>
+                            <input type="number" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="height" placeholder="Introduce your height" />
+                        </div>
+                        <div className="form-group">
+                            <label className="text-color" for="exampleFormControlInput1">Weight</label>
+                            <input type="number" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="weight" placeholder="Introduce your weight" />
+                        </div>
+                        <div className="form-group">
+                            <label for="inputState" className="text-color">Position</label>
+                            <select name="position" onChange={this.handleChange} id="inputState" className="form-control">
+                                <option selected>Goalkeeper</option>
+                                <option>Defender</option>
+                                <option>Migfielder</option>
+                                <option>Ataquer</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label className="text-color" for="exampleFormControlInput1">Squad number</label>
+                            <input type="number" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="squadnumber" placeholder="Introduce your squad number" />
+                        </div>
+                        <div className="custom-file">
+                            <label className="text-color" for="exampleFormControlInput1">Photo</label>
+                            <input type="file" className="custom-file-input" id="customFile" />
+                            <label className="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Add as a player</button>
+                        </form>
                 </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                    
+            <div className="col-2"></div>
         </div>
+        </div >
     }
 }
 export default withRouter(AddPlayer)

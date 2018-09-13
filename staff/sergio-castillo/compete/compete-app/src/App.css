@@ -2,22 +2,29 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.App__header{
+  background-color: #f0f0f0
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .App-intro {
   font-size: large;
 }
+
+.btn-primary{
+  background-color: #6bb1d6;
+  border-color: #6bb1d6;
+}
+
+.text-color{
+  color: #6bb1d6;
+}
+
+li{
+  text-decoration: none;
+}
+
+

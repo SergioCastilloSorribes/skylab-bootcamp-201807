@@ -24,6 +24,13 @@ class TeamsList extends Component {
             })
     }
 
+    componentWillReceiveProps(){
+        this.props.handleListTeamsFromTournament()
+            .then(teams => {
+                this.setState({ teams })
+            })
+    }
+
     handleRemoveTeamFromTournament = (e, teamId) => {
         e.preventDefault()
         logic.removeTeamFromTournament(this.state.id, this.state.token, this.state.tournamentId, teamId)

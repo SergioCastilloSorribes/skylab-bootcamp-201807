@@ -20,25 +20,33 @@ class listMyTeamsAsPlayer extends Component {
     }
 
     isTeamsIn = () => {
-        if (this.state.teams.length>0) {
+        if (this.state.teams.length > 0) {
             return true
         } else {
             return false
         }
     }
 
-    handleGoToTeam = (e,teamId) => {
+    handleGoToTeam = (e, teamId) => {
         e.preventDefault()
         this.props.handleGoToTeam(teamId)
     }
 
     render() {
 
-        return <div>
-            {this.isTeamsIn() && <h4>My Teams</h4>}
+        return <div className="container">
+            <div className="row">
+            <div className="col-3"></div>
+            <div className="col-6">
+            {this.isTeamsIn() && <h3>My teams as player</h3>}
             {this.isTeamsIn() && <ul>
-            {this.isTeamsIn() && this.state.teams.map(team => <li key={team.id}> <a href="" onClick={(e)=>this.handleGoToTeam(e,team._id)}>{` ${team.name}`}</a> </li>)}
+                <div class="list-group">
+                {this.isTeamsIn() && this.state.teams.map(team => <a href="#" class="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{` ${team.name}`}</a>)}
+                </div>
             </ul>}
+            </div>
+            <div className="col-3"></div>
+            </div>
         </div>
 
     }

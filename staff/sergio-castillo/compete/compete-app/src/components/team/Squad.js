@@ -24,16 +24,31 @@ class Squad extends Component {
             })
     }
 
+    componentWillReceiveProps() {
+        this.props.handleListPlayersFromTeam()
+            .then(({ team }) => {
+                this.setState({ squad: team })
+            })
+    }
+
     handleRemovePlayerFromTeam = (e, playerId) => {
         e.preventDefault()
-       logic.removePlayerFromTeam(this.state.id, this.state.token, this.state.teamId, playerId)
+        logic.removePlayerFromTeam(this.state.id, this.state.token, this.state.teamId, playerId)
     }
 
     render() {
-        return <div>
-            <ul>
-                {this.state.squad.map(player => <li key={player._id}> {player.name} {player.surname} {this.state.role==='manager' && <a href="" onClick={(e)=>this.handleRemovePlayerFromTeam(e, player._id)}>[remove player from team]</a>}</li>)}
-            </ul>
+
+        return <div className="container">
+            <div className="row">
+                <div className="col-3"></div>
+                <div className="col-6">
+                    <h3>SQUAD</h3>
+                    {this.state.squad.map(player => <div className="message-header"><a href="#" className="list-group-item list-group-item-action">{player.dni} {player.name} {player.surname} {player.position}</a><button className="btn btn-danger" onClick={(e) => this.handleRemovePlayerFromTeam(e, player._id)}>x</button></div>
+                    )}
+
+                </div>
+                <div className="col-3"></div>
+            </div>
         </div>
     }
 }

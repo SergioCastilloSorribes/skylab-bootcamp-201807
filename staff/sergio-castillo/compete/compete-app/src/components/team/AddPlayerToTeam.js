@@ -40,7 +40,7 @@ class AddPlayerToTeam extends Component {
 
     handleAddPlayerToTeam = (e, playerId) => {
         e.preventDefault()
-        logic.addPlayerToTeam(this.state.id, this.state.token, this.state.teamId, playerId)
+        this.props.handleAddPlayerToTeam(playerId)
     }
 
     render() {

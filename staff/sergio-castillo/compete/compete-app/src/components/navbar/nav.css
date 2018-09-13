@@ -1,0 +1,23 @@
+li {
+    display: flow-root;
+    text-decoration: none !important;
+}
+ul{
+    text-decoration: none !important;
+}
+
+.bg-info {
+    background-color: #6bb1d6!important;
+}
+span{
+    color: #6bb1d6
+}
+button{
+    background-color: #f0f0f0
+}
+
+.btn-info {
+    color: #6bb1d6;
+    background-color: #f0f0f0;
+    border-color: #f0f0f0;
+}

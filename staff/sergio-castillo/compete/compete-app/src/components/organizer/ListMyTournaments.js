@@ -19,7 +19,15 @@ class ListMyTournaments extends Component {
                     tournaments
                 })
             })
+    }
 
+    componentWillReceiveProps(){
+        this.props.handleListMyTournamentsAsOrganizer()
+            .then(tournaments => {
+                this.setState({
+                    tournaments
+                })
+            })
     }
 
 
@@ -35,7 +43,7 @@ class ListMyTournaments extends Component {
                         this.setState({
                             tournaments
                         })
-                        this.setState({refresh:""})
+                        this.setState({ refresh: "" })
                     })
             })
     }
@@ -48,9 +56,17 @@ class ListMyTournaments extends Component {
 
     render() {
 
-        return <div>
-            <h1>LIST MY TOURNAMENTS</h1>
-            {this.state.tournaments.map(tournament => <li key={tournament.id}> <a href="" onClick={(e) => { this.handleGoToTournament(e, tournament.id) }}>{tournament.name}</a><a href="" onClick={(e) => { this.handleRemoveTournament(e, tournament.id) }} >[x]</a> </li>)}
+        return <div className="container">
+            <div className="row">
+            <div className="col-3"></div>
+            <div className="col-6">
+                <h3>MY TEAMS AS ORGANIZER</h3>
+                {this.state.tournaments.map(tournament =><div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTournament(e, tournament.id)}>{tournament.name}</a><button className="btn btn-danger" onClick={(e)=>this.handleRemoveTournament(e,tournament.id)}>x</button></div>
+                )}
+                
+                </div>
+                <div className="col-3"></div>
+            </div>
         </div>
     }
 }

@@ -26,7 +26,7 @@ class Organizer extends Component {
             .then(res => {
                 sessionStorage.setItem('organizer', true)
                 this.setState({ player: sessionStorage.getItem('organizer') })
-                window.location.reload()
+                this.handleListMyTournamentsAsOrganizer()
                 return res
             })
     }
@@ -45,7 +45,6 @@ class Organizer extends Component {
 
     render() {
         return <div>
-            <h1>Tournament</h1>
             <CreateTournament handleCreateTournament={this.handleCreateTournament} />
             {this.isOrganizerIn() && <ListMyTournaments handleListMyTournamentsAsOrganizer={this.handleListMyTournamentsAsOrganizer} handleGoToTournament={this.handleGoToTournament} handleRemoveTournament={this.handleRemoveTournament} />}
             <Switch>

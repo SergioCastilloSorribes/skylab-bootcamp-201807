@@ -11,7 +11,7 @@ import Team from './components/Team'
 import Profile from './components/Profile'
 import './App.css';
 import Navbar from './components/navbar/Navbar'
-import Nav from './components/nav'
+import Nav from './components/navbar/nav'
 
 
 class App extends Component {
@@ -97,10 +97,10 @@ class App extends Component {
 
   render() {
     return <div className="App">
-      <Navbar />
-      <header className="row App__header">
-        <div className="col-2"></div>
-        <div className="col-2 flexbox App__header__item App__header__item__left">
+      <Navbar isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout}/>
+      {/* <header className="row App__header"> */}
+
+        {/* <div className="col-2 flexbox App__header__item App__header__item__left">
           <Link to="/home" onClick={this.onResetMessage}> <p className="App__header__nav__item">C</p></Link>
         </div>
         <nav className="col-3 App__header__nav">
@@ -111,13 +111,10 @@ class App extends Component {
               <Link to="/" onClick={this.handleLogout}> <p className="App__header__nav__item">Logout</p></Link>
             </li>
           </ul>}
-        </nav>
-      </header>
-      <div>
-        <Nav />
-        {this.isLoggedIn() && <button onClick={this.handlePlayer}>Player</button>}
-        {this.isLoggedIn() && <button onClick={this.handleManager}>Manager</button>}
-        {this.isLoggedIn() && <button onClick={this.handleOrganizer}>Organizer</button>}
+        </nav> */}
+      {/* </header> */}
+      <div className="App__header">
+        {this.isLoggedIn() && <Nav handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleOrganizer={this.handleOrganizer}/>}
       </div>
       <Switch>
         <Route exact path="/" render={() => this.isLoggedIn() ? <Redirect to="/home" /> : <Landing handleLogin={this.handleLogin} />} />

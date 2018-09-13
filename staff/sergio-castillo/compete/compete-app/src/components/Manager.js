@@ -11,7 +11,8 @@ class Manager extends Component {
         token: sessionStorage.getItem('token') || '',
         manager: sessionStorage.getItem('manager'),
         refresh: "",
-        role:'manager'
+        role:'manager',
+        res:[]
     }
 
     isManagerIn = () => {
@@ -22,18 +23,12 @@ class Manager extends Component {
         }
     }
 
-    refreshPage = () => {
-        sessionStorage.setItem('manager', true)
-        this.setState({ player: sessionStorage.getItem('manager') })
-        this.setState({ refresh: true })
-    }
-
     handleCreateTeam = (id, token, name, description, owner) => {
         logic.createTeam(id, token, name, description, owner)
             .then(res => {
                 sessionStorage.setItem('manager', true)
                 this.setState({ player: sessionStorage.getItem('manager') })
-                window.location.reload()
+                this.handleListMyTeamsAsManager()
                 return res
             })
     }
@@ -52,8 +47,7 @@ class Manager extends Component {
 
     render() {
         return <div>
-            <h1>Team</h1>
-            {<CreateTeam handleCreateTeam={this.handleCreateTeam} refreshPage={this.refreshPage} />}
+            {<CreateTeam handleCreateTeam={this.handleCreateTeam} />}
             {this.isManagerIn() && <ListMyTeams handleListMyTeamsAsManager={this.handleListMyTeamsAsManager} handleRemoveTeam={this.handleRemoveTeam} handleGoToTeam={this.handleGoToTeam}/>}
         </div>
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../logic'
 import Feedback from './Feedback'
+import './Landing.css';
 
 class Landing extends Component {
 
@@ -47,45 +48,54 @@ class Landing extends Component {
 
     render() {
         return <div>
-            <form onSubmit={this.handleSubmit}>
-                <input type="email" onChange={this.handleChange} name="email" placeholder="Introduce your email" />
-                <input type="password" name="password" onChange={this.handleChange} placeholder="Password" />
-                <button type="submit">Authenticate</button>
-            </form>
-            {this.state.feedbackAuth && <Feedback message={this.state.feedbackAuth} />}
-            <form onSubmit={this.handleRegister}>
-                <input type="email" onChange={this.handleChange} name="email" placeholder="Introduce your email" />
-                <input type="password" name="password" onChange={this.handleChange} placeholder="Password" />
-                <input type="password" name="confirmPassword" onChange={this.handleChange} placeholder="Confirm password" />
-                <button type="submit">Create a new account</button>
-            </form>
-            {this.state.feedbackReg && <Feedback message={this.state.feedbackReg} />}
-            <div className="container">
-            <div className="row">
-                <div className="col-3"></div>
-                <div className="col-6 borderBox">
-                    <h4>Register</h4>
-                    <form onSubmit={this.onRegisterSubmitted}>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Name</label>
-                            <input type="name" className="form-control" placeholder="Enter name" onChange={this.onNameChanged} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input type="email" className="form-control" placeholder="Enter email" onChange={this.onEmailChanged} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <input type="password" className="form-control" placeholder="Password" onChange={this.onPasswordChanged} />
-                            <small className="form-text text-muted">The password must be more than 6 characters</small>
-                        </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </form>
+            <div className="container auth">
+                <div className="row">
+                    <div className="col-4"></div>
+                    <div className="col-4 borderBox">
+                        <h4 className="text-color">Authenticate</h4>
+                        <form onSubmit={this.handleSubmit} >
+                            <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">Email</label>
+                                <input type="email" name="email" className="form-control" placeholder="Enter email" onChange={this.handleChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Password</label>
+                                <input type="password" name="password" className="form-control" placeholder="Password" onChange={this.handleChange} />
+                                <small className="form-text text-muted">The password must be more than 6 characters</small>
+                            </div>
+                            <button type="submit" className="btn btn-primary">Authenticate</button>
+                        </form>
+                    </div>
+                    <div className="col-4"></div>
                 </div>
-                <div className="col-3"></div>
             </div>
-      </div>
-        
+           {this.state.feedbackAuth && <Feedback message={this.state.feedbackAuth} />}
+            <div className="container">
+                <div className="row">
+                    <div className="col-4"></div>
+                    <div className="col-4 borderBox">
+                        <h4 className="text-color">Register</h4>
+                        <form onSubmit={this.handleRegister}>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">Email</label>
+                                <input type="email" name="email" className="form-control" placeholder="Enter email" onChange={this.handleChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Password</label>
+                                <input type="password" name="password" className="form-control" placeholder="Password" onChange={this.handleChange} />
+                                <small className="form-text text-muted">The password must be more than 6 characters</small>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">Confirm password</label>
+                                <input type="password" name="confirmPassword" className="form-control" placeholder="Password" onChange={this.handleChange} />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Create account</button>
+                        </form>
+                    </div>
+                    <div className="col-4"></div>
+                </div>
+            </div>
+            {this.state.feedbackReg && <Feedback message={this.state.feedbackReg} />}
         </div>
     }
 }

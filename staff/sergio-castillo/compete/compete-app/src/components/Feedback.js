@@ -2,7 +2,7 @@ import React from 'react'
 
 function showFeedback (props){
     return  <section>
-                <h5 className="message">{props.message}</h5>
+                <h7 className="text-danger">{props.message}</h7>
             </section>
 }
 
