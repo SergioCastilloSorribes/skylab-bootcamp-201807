@@ -10,7 +10,9 @@ cloudinary.config({
     api_secret: 'K5COwbhJ3S2POj887pf77oVfpgo'
 })
 
-let values = [], value
+Array.prototype.random = function () {
+    return this[Math.floor(Math.random() * this.length)];
+}
 
 const logic = {
 
@@ -43,17 +45,15 @@ const logic = {
             })
         })
     },
-    _random(numberOfTeams) {
-        if (values.length === 0) {
-            for (let i = 0; i < numberOfTeams; i++) {
-                values.push(i)
-            }
-        }
-        value = Math.floor(Math.random() * (values.length - 1))
-        return values.splice(value, 1)
-    },
-    _match() {
-        return logic.createNewMatch(id, tournamentId, winners[this._random(winners.length)], winners[this._random(winners.length)])
+    _random(winners) {
+        const id1 = winners.random()
+        let id2
+
+        while ((id2 = winners.random()) === id1);
+
+        debugger
+
+        return [id1, id2]
     },
 
     /**
@@ -890,23 +890,29 @@ const logic = {
                 if (knockouts.includes(winners.length)) {
                     switch (winners.length) {
                         case 2:
-                            return logic.createNewMatch(id, tournamentId, winners[this._random(winners.length)], winners[this._random(winners.length)])
+                            const [a1, a2] = this._random(winners)
+
+                            return logic.createNewMatch(id, tournamentId, a1, a2)
                                 .then(() => true)
                         case 4:
+                            const [b1, b2] = this._random(winners)
 
-                            return Promise.all([1, 2].map(ele => logic.createNewMatch(id, tournamentId, winners[this._random(winners.length)], winners[this._random(winners.length)]))).then(() => true)
+                            return Promise.all([1, 2].map(ele => logic.createNewMatch(id, tournamentId, b1, b2))).then(() => true)
 
                         case 8:
+                            const [c1, c2] = this._random(winners)
 
-                            return Promise.all([1, 2, 3, 4].map(ele => logic.createNewMatch(id, tournamentId, winners[this._random(winners.length)], winners[this._random(winners.length)]))).then(() => true)
+                            return Promise.all([1, 2, 3, 4].map(ele => logic.createNewMatch(id, tournamentId, c1, c2))).then(() => true)
 
                         case 16:
+                            const [d1, d2] = this._random(winners)
 
-                            return Promise.all([1, 2, 3, 4, 5, 6, 7, 8].map(ele => logic.createNewMatch(id, tournamentId, winners[this._random(winners.length)], winners[this._random(winners.length)]))).then(() => true)
+                            return Promise.all([1, 2, 3, 4, 5, 6, 7, 8].map(ele => logic.createNewMatch(id, tournamentId, d1, d2))).then(() => true)
 
                         case 32:
+                            const [e1, e2] = this._random(winners)
 
-                            return Promise.all([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(ele => logic.createNewMatch(id, tournamentId, winners[this._random(winners.length)], winners[this._random(winners.length)]))).then(() => true)
+                            return Promise.all([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(ele => logic.createNewMatch(id, tournamentId, e1, e2))).then(() => true)
 
                         default:
                             break
@@ -925,7 +931,9 @@ const logic = {
                         match.push(a)
                     }
 
-                    return Promise.all(match.map(ele => logic.createNewMatch(id, tournamentId, winners[this._random(winners.length)], winners[this._random(winners.length)]))).then(() => true)
+                    const [i1, i2] = this._random(winners)
+
+                    return Promise.all(match.map(ele => logic.createNewMatch(id, tournamentId, i1, i2))).then(() => true)
                 }
             })
 
