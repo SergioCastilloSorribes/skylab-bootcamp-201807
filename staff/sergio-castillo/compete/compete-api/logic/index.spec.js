@@ -1921,7 +1921,7 @@ describe('logic', () => {
         )
     })
 
-    true && describe('retrieve a list of matches of a tournament data', () => {
+    !true && describe('retrieve a list of matches of a tournament data', () => {
         let id, firstTeamId, secondTeamId, team3Id, team4Id,tournamentId, matchId, match2Id,resultId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1963,6 +1963,7 @@ describe('logic', () => {
         it('should retrieve a list of matches correctly', () =>
             logic.listMatches(id, tournamentId)
                 .then(res => {
+                    debugger
                     expect(res).to.exist
 
                 })

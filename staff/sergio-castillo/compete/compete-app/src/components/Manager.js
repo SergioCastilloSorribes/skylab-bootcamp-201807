@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../logic'
 import CreateTeam from './manager/CreateTeam'
-import ListMyTeams from './manager/ListMyTeams';
+import ListMyTeams from './manager/ListMyTeams'
+import Feedback from './Feedback'
 
 
 class Manager extends Component {
@@ -11,25 +12,30 @@ class Manager extends Component {
         token: sessionStorage.getItem('token') || '',
         manager: sessionStorage.getItem('manager'),
         refresh: "",
-        role:'manager',
-        res:[]
+        role: 'manager',
+        res: [],
+        feedback: undefined,
     }
 
-    isManagerIn = () => {
-        if (this.state.manager === 'true') {
-            return true
-        } else {
-            return false
-        }
-    }
+    // isManagerIn = () => {
+    //     if (this.state.manager === 'true') {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
 
     handleCreateTeam = (id, token, name, description, owner) => {
         logic.createTeam(id, token, name, description, owner)
-            .then(res => {
+            .then(() => {
                 sessionStorage.setItem('manager', true)
-                this.setState({ player: sessionStorage.getItem('manager') })
+                this.setState({ manager: sessionStorage.getItem('manager') })
+            })
+            .then(()=> {
                 this.handleListMyTeamsAsManager()
-                return res
+            })
+            .catch(({ message }) => {
+                this.setState({feedback:message})
             })
     }
 
@@ -47,8 +53,9 @@ class Manager extends Component {
 
     render() {
         return <div>
+            {this.state.feedback && <Feedback message={this.state.feedback}/>}
             {<CreateTeam handleCreateTeam={this.handleCreateTeam} />}
-            {this.isManagerIn() && <ListMyTeams handleListMyTeamsAsManager={this.handleListMyTeamsAsManager} handleRemoveTeam={this.handleRemoveTeam} handleGoToTeam={this.handleGoToTeam}/>}
+            {this.state.manager==='true' && <ListMyTeams handleListMyTeamsAsManager={this.handleListMyTeamsAsManager} handleRemoveTeam={this.handleRemoveTeam} handleGoToTeam={this.handleGoToTeam} />}
         </div>
     }
 }

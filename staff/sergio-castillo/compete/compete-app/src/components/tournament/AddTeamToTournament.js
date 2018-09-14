@@ -38,7 +38,7 @@ class AddTeamToTournament extends Component {
 
     handleAddTeamToTournament = (e, teamId) => {
         e.preventDefault()
-        logic.addTeamToTournament(this.state.id, this.state.token, this.state.tournamentId, teamId)
+        this.props.handleAddTeamToTournament(teamId)
     }
 
     render() {

@@ -13,12 +13,12 @@ class ListMyTournaments extends Component {
     }
 
     componentDidMount() {
-        this.props.handleListMyTournamentsAsOrganizer()
-            .then(tournaments => {
-                this.setState({
-                    tournaments
+            this.props.handleListMyTournamentsAsOrganizer()
+                .then(tournaments => {
+                    this.setState({
+                        tournaments
+                    })
                 })
-            })
     }
 
     componentWillReceiveProps(){

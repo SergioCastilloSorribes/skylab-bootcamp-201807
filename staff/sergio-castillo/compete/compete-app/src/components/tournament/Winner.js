@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import Feedback from '../Feedback'
+import logic from '../../logic'
 
 
 class Winner extends Component {
@@ -13,18 +14,31 @@ class Winner extends Component {
         role: sessionStorage.getItem('role'),
         tournamentId: sessionStorage.getItem('tournamentId'),
         tournament: [],
-        teams: [],
-        winner:[]
+        team: [],
+        winner:undefined
     }
 
     componentDidMount() {
-        this.setState({winner: this.props.winner})
+        this.props.winners.map(winner => {
+            logic.retrieveTeam(this.state.id, this.state.token, winner)
+            .then(team=> {
+                this.setState({team})
+            })
+        })
     }
 
     render() {
-        return <div>
-            <h2>WINNER</h2>
-            <p>LAZY DOGS UNITED</p>
+
+        return<div className="container">
+            <div className="row">
+            <div className="col-3"></div>
+            <div className="col-6">
+            <h3>CONGRATULATIONS {this.state.team.name}</h3>
+            <span>{this.state.team.description}</span>
+            {/* <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} /> */}
+            </div>
+            <div className="col-3"></div>
+            </div>
         </div>
     }
 }

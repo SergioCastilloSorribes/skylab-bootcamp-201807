@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import './ListMyTeams.css'
+import Feedback from '../Feedback'
 
 class ListMyTeams extends Component {
 
@@ -9,7 +10,8 @@ class ListMyTeams extends Component {
         id: sessionStorage.getItem('id') || '',
         token: sessionStorage.getItem('token') || '',
         teams: [],
-        refresh: ""
+        refresh: "",
+        feedbacklist: undefined
     }
 
     componentDidMount() {
@@ -27,6 +29,9 @@ class ListMyTeams extends Component {
                 this.setState({
                     teams
                 })
+            })
+            .catch(({message})=> {
+                this.setState({feedbacklist: message})
             })
     }
 
@@ -61,6 +66,7 @@ class ListMyTeams extends Component {
                 <h3>MY TEAMS AS MANAGER</h3>
                 {this.state.teams.map(team =><div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{team.name}</a><button className="btn btn-danger" onClick={(e)=>this.removeTeam(e,team._id)}>x</button></div>
                 )}
+                {this.state.feedbacklist && <Feedback />}
                 
                 </div>
                 <div className="col-3"></div>

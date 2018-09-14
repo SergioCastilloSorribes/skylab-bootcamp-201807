@@ -806,11 +806,11 @@ const logic = {
                 return Team.findOne({ '_id': firstTeamId })
             })
             .then(team => {
-                if (!team) throw new LogicError(`The team with id ${firstTeamId} does not exists on database`)
+                if (!team) throw new LogicError(`The team with id ${firstTeamId} does not exists on database (1)`)
                 return Team.findOne({ '_id': secondTeamId })
             })
             .then(team => {
-                if (!team) throw new LogicError(`The team with id ${secondTeamId} does not exists on database`)
+                if (!team) throw new LogicError(`The team with id ${secondTeamId} does not exists on database (2)`)
                 return Tournament.findOne({ '_id': tournamentId })
             })
             .then(tournament => {
@@ -820,8 +820,8 @@ const logic = {
                     if (tournament.winners.includes(secondTeamId)) {
                         const match = { teams: [firstTeamId, secondTeamId] }
                         return Match.create(match)
-                    } else throw new LogicError(`The team with id ${secondTeamId} does not participate in this tournament`)
-                } else throw new LogicError(`The team with id ${firstTeamId} does not participate in this tournament`)
+                    } else throw new LogicError(`The team with id ${secondTeamId} does not participate in this tournament (3)`)
+                } else throw new LogicError(`The team with id ${firstTeamId} does not participate in this tournament (4)`)
             })
             .then(match => {
                 matchId = match.id
@@ -1027,7 +1027,7 @@ const logic = {
                 if (tournament.organizer.toString() !== id) throw new LogicError(`The user with id ${id} is not the organizer of this tournament`)
                 if (tournament.state === 'creating') throw new LogicError(`The tournament with name ${tournament.name} has not started yet`)
                 if (tournament.state === 'finish') throw new LogicError(`The tournament with name ${tournament.name} is finished`)
-                if (tournament.winners.length === 1) throw new LogicError(`The tournament with name ${tournament.name}) is finished`)
+                if (tournament.winners.length === 0) throw new LogicError(`The tournament with name ${tournament.name}) is finished`)
                 if (tournament.roundMatches === 0) throw new LogicError(`This round is finished. You must start a new round`)
                 // if (!tournament.matches.includes(matchId)) throw new LogicError(`This match does not belong to the tournament ${tournament.name}`)
                 return Match.findOne({ '_id': matchId })

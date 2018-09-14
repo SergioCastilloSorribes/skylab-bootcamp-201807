@@ -43,14 +43,6 @@ class CreateTournament extends Component {
         </div>
     </div>
 
-        // return <div>
-        //     <h3>CREATE TOURNAMENT</h3>
-        //     <form onSubmit={this.handleSubmit}>
-        //         <input type="string" onChange={this.handleChange} name="name" placeholder="Introduce your name" />
-        //         <button type="submit">Create Tournament</button>
-        //     </form>
-        // </div>
-
     }
 
 }

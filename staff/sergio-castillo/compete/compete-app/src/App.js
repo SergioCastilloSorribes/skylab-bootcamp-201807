@@ -90,17 +90,20 @@ class App extends Component {
     e.preventDefault()
     this.setState({
       id: '',
-      token: ''
+      token: '',
+      player: false,
+      manager: false,
+      organizer: false,
     })
     sessionStorage.clear()
   }
 
   render() {
     return <div className="App">
-      <Navbar isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout}/>
+      <Navbar isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout} />
       {/* <header className="row App__header"> */}
 
-        {/* <div className="col-2 flexbox App__header__item App__header__item__left">
+      {/* <div className="col-2 flexbox App__header__item App__header__item__left">
           <Link to="/home" onClick={this.onResetMessage}> <p className="App__header__nav__item">C</p></Link>
         </div>
         <nav className="col-3 App__header__nav">
@@ -114,7 +117,7 @@ class App extends Component {
         </nav> */}
       {/* </header> */}
       <div className="App__header">
-        {this.isLoggedIn() && <Nav handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleOrganizer={this.handleOrganizer}/>}
+        {this.isLoggedIn() && <Nav handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleOrganizer={this.handleOrganizer} />}
       </div>
       <Switch>
         <Route exact path="/" render={() => this.isLoggedIn() ? <Redirect to="/home" /> : <Landing handleLogin={this.handleLogin} />} />

@@ -1,8 +1,8 @@
 const fetch = require('isomorphic-fetch')
 
 const logic = {
-    // url: 'http://localhost:8080/api',
-    url: 'https://competeapi.herokuapp.com/api',
+    url: 'http://localhost:8080/api',
+    // url: 'https://competeapi.herokuapp.com/api',
 
     _call(path, method, headers, body, expectedStatus) {
         const config = { method }
@@ -257,7 +257,7 @@ const logic = {
         return Promise.resolve()
             .then(() => {
                 this._validateIdField(id)
-                
+
                 return this._call(`user/${id}/searchplayersbyquery?dni=${dni}`, 'get',
                     { authorization: `bearer ${token}`, 'content-type': 'application/json' }
                     , undefined, 200)
@@ -353,7 +353,7 @@ const logic = {
             })
     },
 
-    listTeamsFromTournament(id, token, tournamentId){
+    listTeamsFromTournament(id, token, tournamentId) {
         return Promise.resolve()
             .then(() => {
                 this._validateIdField(id)
@@ -435,11 +435,11 @@ const logic = {
             })
     },
 
-    createNewRound(id, token, tournamentId){
+    createNewRound(id, token, tournamentId) {
+        debugger
         return Promise.resolve()
             .then(() => {
                 this._validateIdField(id)
-                this._validateIdField(tournamentId)
                 return this._call(`user/${id}/tournament/${tournamentId}/createnewround`, 'put',
                     { authorization: `bearer ${token}`, 'content-type': 'application/json' }
                     , undefined, 200)
@@ -459,6 +459,19 @@ const logic = {
                     .then(res => res.json())
                     .then(res => res)
             })
+    },
+
+    addResult(id, token, tournamentId, matchId, goalsFirstTeam, goalsSecondTeam){
+        return Promise.resolve()
+        .then(() => {
+            this._validateIdField('id', id)
+
+            return this._call(`user/${id}/tournament/${tournamentId}/match/${matchId}/addresult`, 'post', 
+            { authorization: `bearer ${token}`, 'content-type': 'application/json'
+            }, JSON.stringify({ goalsFirstTeam, goalsSecondTeam }), 200)
+                .then(res => res.json())
+                .then((res) => res)
+        })
     },
 
 }

@@ -3,13 +3,15 @@ import { withRouter, Switch } from 'react-router-dom'
 import logic from '../logic'
 import CreateTournament from './organizer/CreateTournament';
 import ListMyTournaments from './organizer/ListMyTournaments';
+import Feedback from './Feedback'
 
 class Organizer extends Component {
     state = {
         id: sessionStorage.getItem('id') || '',
         token: sessionStorage.getItem('token') || '',
         organizer: sessionStorage.getItem('organizer'),
-        role:'organizer'
+        role:'organizer',
+        res:[]
     }
 
     isOrganizerIn = () => {
@@ -21,13 +23,13 @@ class Organizer extends Component {
     }
 
     handleCreateTournament = (name) => {
+        debugger
         const { id, token } = this.state
         logic.createTournament(id, token, name)
-            .then(res => {
+            .then(() => {
                 sessionStorage.setItem('organizer', true)
-                this.setState({ player: sessionStorage.getItem('organizer') })
+                this.setState({ organizer: sessionStorage.getItem('organizer') })
                 this.handleListMyTournamentsAsOrganizer()
-                return res
             })
     }
 

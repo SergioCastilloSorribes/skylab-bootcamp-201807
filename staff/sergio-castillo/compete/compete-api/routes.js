@@ -384,9 +384,8 @@ router.put('/user/:id/tournament/:tournamentId/starttournament', [validateJwt, j
 
 router.put('/user/:id/tournament/:tournamentId/createnewround', [validateJwt, jsonBodyParser], (req, res) => {
     const { params: { id, tournamentId } } = req
-    debugger
     logic.createNewRound(id, tournamentId)
-        .then(matches => res.json({ message: 'Create new round correctly' }, matches))
+        .then(() => res.json({ message: 'Create new round correctly' }))
         .catch(err => {
             const { message } = err
             res.status(err instanceof LogicError ? 400 : 500).json({ message })
