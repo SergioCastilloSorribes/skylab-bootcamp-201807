@@ -62,7 +62,7 @@ class ListMyTeams extends Component {
         return <div className="container">
             <div className="row">
             <div className="col-3"></div>
-            <div className="col-6">
+            <div className="col-6" style={{margin: '0 auto 100px auto'}}>
                 <h3>MY TEAMS AS MANAGER</h3>
                 {this.state.teams.map(team =><div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{team.name}</a><button className="btn btn-danger" onClick={(e)=>this.removeTeam(e,team._id)}>x</button></div>
                 )}

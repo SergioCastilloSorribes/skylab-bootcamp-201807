@@ -23,25 +23,6 @@ class Matches extends Component {
         res: []
     }
 
-    // componentDidMount() {
-    //     this.props.handleListMatches()
-    //         .then(({ matchData }) => {
-    //             this.setState({ matchData })
-    //         })
-    //         .catch(({ message }) => {
-    //             this.setState({ feedback: message })
-    //         })
-    // }
-
-    // componentWillReceiveProps() {
-    //     this.props.handleListMatches()
-    //         .then(({ matchData }) => {
-    //             this.setState({ matchData })
-    //         })
-    //         .catch(({message})=> {
-    //             this.setState({feedback:message})
-    //         })
-    // }
 
     handleChange = (e) => {
         const { name, value } = e.target

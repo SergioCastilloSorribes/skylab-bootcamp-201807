@@ -3,7 +3,7 @@ import { Route, withRouter, Link, Redirect, Switch } from 'react-router-dom'
 import logic from './logic'
 import Landing from './components/Landing'
 import Home from './components/Home'
-import Player from './components/Player'
+import Player from './components/player/Player'
 import Manager from './components/Manager'
 import Organizer from './components/Organizer'
 import Tournament from './components/Tournament'
@@ -13,6 +13,15 @@ import './App.css';
 import Navbar from './components/navbar/Navbar'
 import Nav from './components/navbar/nav'
 
+// En componente App solo debería tener las rutas y las barras de navegaciones
+// Debe haber cinco componentes principales: player, manager, organizer, team y tournament.
+// player debe manejar el componente de la ficha y luego manejar tres componentes: la ficha del jugador, la lista de partidos y la lista de torneos, y la ficha debe ser updateable con cualquier campo.
+// manager debe manejar el crear equipo nuevo, la lista de sus equipos y la lista de sus torneos.
+// organizer debe manejar el crear torneo, y la lista de sus torneos (y en un futuro la lista de instalaciones deportivas)
+// team debe tener la info del equipo, la plantilla para añadir quitar jugadores con un modal q muestre su info y un campo para hacer alineaciones.
+// torneo: debe tener una lista donde añadir y quitar equipos con un modal para su info, y start tournament: q debe mirar el numero de equipos y pintar el torneo ya.
+// Si hay ronda previa pinta la ronda y una vez resuelta pinta el cuadro completo: segun vamos añadiendo equipos al cuadro al pintar su resultado se crea el partido.
+// 
 
 class App extends Component {
   state = {
@@ -101,21 +110,6 @@ class App extends Component {
   render() {
     return <div className="App">
       <Navbar isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout} />
-      {/* <header className="row App__header"> */}
-
-      {/* <div className="col-2 flexbox App__header__item App__header__item__left">
-          <Link to="/home" onClick={this.onResetMessage}> <p className="App__header__nav__item">C</p></Link>
-        </div>
-        <nav className="col-3 App__header__nav">
-          {this.isLoggedIn() && <ul className="App__header__nav__ul">
-            <li className="App__header__item">
-              <Link to="/profile"> <p className="App__header__nav__item">Profile</p></Link></li>
-            <li className="App__header__item">
-              <Link to="/" onClick={this.handleLogout}> <p className="App__header__nav__item">Logout</p></Link>
-            </li>
-          </ul>}
-        </nav> */}
-      {/* </header> */}
       <div className="App__header">
         {this.isLoggedIn() && <Nav handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleOrganizer={this.handleOrganizer} />}
       </div>

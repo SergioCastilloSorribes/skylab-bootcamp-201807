@@ -1,17 +1,30 @@
 li {
     display: flow-root;
-    text-decoration: none !important;
+    padding: 10px 20px;
 }
+
 ul{
     text-decoration: none !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    height: 40px;
+    list-style: none;
 }
 
 .bg-info {
     background-color: #6bb1d6!important;
 }
 span{
-    color: #6bb1d6
+    color: #6bb1d6;
+    margin-right: 10px;
+    text-decoration: none !important;
 }
+
+span:hover {
+    color: #205470
+}
+
 button{
     background-color: #f0f0f0
 }

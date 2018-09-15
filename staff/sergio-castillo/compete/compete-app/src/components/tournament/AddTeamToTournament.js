@@ -43,13 +43,15 @@ class AddTeamToTournament extends Component {
 
     render() {
         return <div>
+            <div className="col-8" style={{width: '22%', margin: '50px auto 0 auto'}}>
             {this.state.role === 'organizer' && <form onSubmit={this.handleListTeams}>
-                <input type="text" name="name" placeholder="Introduce name" value={this.state.name} onChange={this.handleChange} />
-                <button type="submit">Search Teams</button>
+                <input style={{margin: '0 auto 20px auto'}} className="form-control" type="text" name="name" placeholder="Introduce name" value={this.state.name} onChange={this.handleChange} />
+                <button className="btn btn-primary" type="submit">Search Teams</button>
             </form>}
-            {this.state.role==='organizer' && <ul>
-                {this.state.teams.map(team => <li key={team.id}>{team.name} <a href="" onClick={(e) => this.handleAddTeamToTournament(e, team.id)}>Add to tournament</a> </li>)}
+            {this.state.role==='organizer' && <ul style={{margin: '50px 0', listStyle: 'none', textAlign: 'left'}}>
+                {this.state.teams.map(team => <li style={{padding: '0'}} key={team.id}>{team.name} <a href="" onClick={(e) => this.handleAddTeamToTournament(e, team.id)}>Add to tournament</a> </li>)}
             </ul>}
+            </div>
         </div>
     }
 }

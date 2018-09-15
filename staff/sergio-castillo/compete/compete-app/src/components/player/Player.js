@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import logic from '../logic'
-import AddPlayer from './player/AddPlayer'
-import PlayerData from './player/PlayerData'
-import Feedback from './Feedback'
-import ListMyTeamsAsPlayer from './player/ListMyTeamsAsPlayer'
+import logic from '../../logic'
+import AddPlayer from './AddPlayer'
+import PlayerData from './PlayerData'
+import Feedback from '../Feedback'
+import ListMyTeamsAsPlayer from './ListMyTeamsAsPlayer'
+import ListMyTournamentsAsPlayer from './ListMyTournamentsAsPlayer'
 
 class Player extends Component {
     state = {
@@ -83,8 +84,8 @@ class Player extends Component {
             {!this.isPlayerIn() && <AddPlayer handleAddPlayer={this.handleAddPlayer} />}
             {!this.isPlayerIn() && <Feedback message={this.state.feedbackAddPlayer} />}
             {this.isPlayerIn() && <PlayerData handleRetrievePlayer={this.handleRetrievePlayer} />}
+            {this.isPlayerIn() && <button style={{width: '15%', margin: '-120px 0 0 0'}} onClick={this.handleRemovePlayer} className="btn btn-primary">Remove user as a player</button>}
             {this.isPlayerIn() &&  <ListMyTeamsAsPlayer handleListMyTeamsAsPlayer={this.handleListMyTeamsAsPlayer} handleGoToTeam={this.handleGoToTeam} />}
-            {this.isPlayerIn() && <button onClick={this.handleRemovePlayer} className="btn btn-primary">Remove user as a player</button>}
             {this.isPlayerIn() && <Feedback message={this.state.feedbackRemoveRole} />}
         </div>
     }

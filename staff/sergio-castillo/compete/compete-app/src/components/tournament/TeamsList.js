@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
 import Feedback from '../Feedback'
 
-
 class TeamsList extends Component {
     state = {
         id: sessionStorage.getItem('id') || '',
@@ -38,9 +37,13 @@ class TeamsList extends Component {
 
     render() {
         return <div>
-            <ul>
-                {this.state.teams.map(team => <li key={team._id}> {team.name} {team.description} {this.state.role === 'organizer' && <a href="" onClick={(e) => this.handleRemoveTeamFromTournament(e, team._id)}>[remove team from tournament]</a>}</li>)}
-            </ul>
+            <div className="col-3"></div>
+            <div className="col-6" style={{width: '100%' , margin: '50px auto 100px auto'}}>
+                <ul style={{listStyle: 'none', textAlign: 'center'}}>
+                    {this.state.teams.map(team => <li key={team._id}> {team.name} {team.description} {this.state.role === 'organizer' && <a href="" onClick={(e) => this.handleRemoveTeamFromTournament(e, team._id)}>[remove team from tournament]</a>}</li>)}
+                </ul>
+            </div>
+            <div className="col-3"></div>
         </div>
     }
 }

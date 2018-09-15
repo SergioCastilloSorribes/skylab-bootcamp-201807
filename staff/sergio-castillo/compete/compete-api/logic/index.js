@@ -51,8 +51,6 @@ const logic = {
 
         while ((id2 = winners.random()) === id1);
 
-        debugger
-
         return [id1, id2]
     },
 
@@ -818,8 +816,19 @@ const logic = {
                 if (tournament.organizer.toString() !== id) throw new LogicError(`The user with id ${id} is not the organizer ot this tournament`)
                 if (tournament.winners.includes(firstTeamId)) {
                     if (tournament.winners.includes(secondTeamId)) {
-                        const match = { teams: [firstTeamId, secondTeamId] }
-                        return Match.create(match)
+                        for (let i = 0; i < tournament.winners.length; i++) {
+                            if (tournament.winners[i] == firstTeamId) {
+                                tournament.winners.splice(i, 1)
+                            }
+                            if (tournament.winners[i] == secondTeamId) {
+                                tournament.winners.splice(i, 1)
+                            }
+                        }
+                        return tournament.save()
+                            .then(() => {
+                                const match = { teams: [firstTeamId, secondTeamId] }
+                                return Match.create(match)
+                            })
                     } else throw new LogicError(`The team with id ${secondTeamId} does not participate in this tournament (3)`)
                 } else throw new LogicError(`The team with id ${firstTeamId} does not participate in this tournament (4)`)
             })
@@ -1015,7 +1024,7 @@ const logic = {
     },
 
     addResult(id, tournamentId, matchId, goalsFirstTeam, goalsSecondTeam) {
-        let firstTeamId, secondTeamId, looser, resultId
+        let firstTeamId, secondTeamId, winnerTeam, resultId
         return Promise.resolve()
             .then(() => {
                 this._validateIdField(id)
@@ -1035,7 +1044,7 @@ const logic = {
                 if (tournament.organizer.toString() !== id) throw new LogicError(`The user with id ${id} is not the organizer of this tournament`)
                 if (tournament.state === 'creating') throw new LogicError(`The tournament with name ${tournament.name} has not started yet`)
                 if (tournament.state === 'finish') throw new LogicError(`The tournament with name ${tournament.name} is finished`)
-                if (tournament.winners.length === 0) throw new LogicError(`The tournament with name ${tournament.name}) is finished`)
+                // if (tournament.winners.length === 0) throw new LogicError(`The tournament with name ${tournament.name}) is finished`)
                 if (tournament.roundMatches === 0) throw new LogicError(`This round is finished. You must start a new round`)
                 // if (!tournament.matches.includes(matchId)) throw new LogicError(`This match does not belong to the tournament ${tournament.name}`)
                 return Match.findOne({ '_id': matchId })
@@ -1049,8 +1058,8 @@ const logic = {
             })
             .then(result => {
                 resultId = result.id
-                if (goalsFirstTeam > goalsSecondTeam) looser = secondTeamId
-                else looser = firstTeamId
+                if (goalsFirstTeam > goalsSecondTeam) winnerTeam = firstTeamId
+                else winnerTeam = secondTeamId
                 return Match.findOne({ '_id': matchId })
             })
             .then(match => {
@@ -1060,12 +1069,9 @@ const logic = {
             })
             .then(tournament => {
                 tournament.roundMatches = tournament.roundMatches - 1
-                for (let i = 0; i < tournament.winners.length; i++) {
-                    if (tournament.winners[i] == looser) {
-                        tournament.winners.splice(i, 1)
-                    }
-                }
-                if (tournament.winners.length === 1) {
+                debugger
+                tournament.winners.push(winnerTeam.toString())
+                if (tournament.winners.length === 1 && tournament.roundMatches === 0) {
                     tournament.state = 'finish'
                     return tournament.save()
                 }

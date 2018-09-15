@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-class listMyTeamsAsPlayer extends Component {
-
-
+class ListMyTournamentsAsPlayer extends Component {
     state = {
         id: sessionStorage.getItem('id') || '',
         token: sessionStorage.getItem('token') || '',
@@ -36,16 +34,16 @@ class listMyTeamsAsPlayer extends Component {
 
         return <div className="container">
             <div className="row">
-            <div className="col-3"></div>
-            <div className="col-6"  style={{margin: '0 auto 100px 20px'}}>
-            {this.isTeamsIn() && <h3>My teams as player</h3>}
-            {this.isTeamsIn() && <ul style={{float: 'left', margin: '-20px auto 0 145px'}}>
-                <div class="list-group">
-                {this.isTeamsIn() && this.state.teams.map(team => <a href="#" class="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{` ${team.name}`}</a>)}
+                <div className="col-3"></div>
+                <div className="col-6" style={{ margin: '0 auto 100px 20px' }}>
+                    {this.isTeamsIn() && <h3>My teams as player</h3>}
+                    {this.isTeamsIn() && <ul style={{ float: 'left', margin: '-20px auto 0 145px' }}>
+                        <div class="list-group">
+                            {this.isTeamsIn() && this.state.teams.map(team => <a href="#" class="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{` ${team.name}`}</a>)}
+                        </div>
+                    </ul>}
                 </div>
-            </ul>}
-            </div>
-            <div className="col-3"></div>
+                <div className="col-3"></div>
             </div>
         </div>
 
@@ -53,4 +51,4 @@ class listMyTeamsAsPlayer extends Component {
 
 }
 
-export default withRouter(listMyTeamsAsPlayer)
+export default withRouter(ListMyTournamentsAsPlayer)

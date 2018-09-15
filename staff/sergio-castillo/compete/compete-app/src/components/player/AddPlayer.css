@@ -1,3 +1,24 @@
 .btn-primary{
     background-color: #6bb1d6;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #2a698b;
+}
+
+h3 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-weight: bolder;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.form-check {
+    display: inline;
+    padding: 20px;
 }

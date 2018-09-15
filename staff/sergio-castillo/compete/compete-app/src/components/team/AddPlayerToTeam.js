@@ -45,9 +45,9 @@ class AddPlayerToTeam extends Component {
 
     render() {
         return <div>
-            {this.state.role === 'manager' && <form onSubmit={this.handleSearchPlayersByQuery}>
-                <input type="text" name="dni" placeholder="Introduce dni" value={this.state.dni} onChange={this.handleChange} />
-                <button type="submit">Search Player</button>
+            {this.state.role === 'manager' && <form style={{display: 'flex'}} onSubmit={this.handleSearchPlayersByQuery}>
+                <input className="form-control"  style={{width: '100%' ,margin: '10px'}} type="text" name="dni" placeholder="Introduce dni" value={this.state.dni} onChange={this.handleChange} />
+                <button className="btn btn-primary" style={{height: '38px', margin: '10px'}} type="submit">Search Player</button>
             </form>}
             {this.state.role==='manager' && <ul>
                 {this.state.players.map(player => <li key={player._id}>{player.dni} {player.name} {player.surname} <a href="" onClick={(e) => this.handleAddPlayerToTeam(e, player._id)}>Add to team</a> </li>)}

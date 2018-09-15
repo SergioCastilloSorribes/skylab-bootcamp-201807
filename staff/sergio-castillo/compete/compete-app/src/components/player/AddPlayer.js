@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import './AddPlayer.css'
 
 class AddPlayer extends Component {
 
@@ -38,10 +39,10 @@ class AddPlayer extends Component {
 
     render() {
         return <div className="container">
+            <h3>ADD PLAYER</h3>
             <div className="row">
                 <div className="col-2"></div>
                 <div className="col-3">
-                    <h3>ADD PLAYER</h3>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label className="text-color" for="exampleFormControlInput1">Dni</label>
@@ -103,11 +104,11 @@ class AddPlayer extends Component {
                             <label className="text-color" for="exampleFormControlInput1">Squad number</label>
                             <input type="number" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="squadnumber" placeholder="Introduce your squad number" />
                         </div>
-                        <div className="custom-file">
+                        {/* <div className="custom-file">
                             <label className="text-color" for="exampleFormControlInput1">Photo</label>
                             <input type="file" className="custom-file-input" id="customFile" />
                             <label className="custom-file-label" for="customFile">Choose file</label>
-                        </div>
+                        </div> */}
                         <button type="submit" className="btn btn-primary">Add as a player</button>
                         </form>
                 </div>

@@ -40,14 +40,12 @@ class Squad extends Component {
 
         return <div className="container">
             <div className="row">
-                <div className="col-3"></div>
-                <div className="col-6">
+                <div className="col-12">
                     <h3>SQUAD</h3>
                     {this.state.squad.map(player => <div className="message-header"><a href="#" className="list-group-item list-group-item-action">{player.dni} {player.name} {player.surname} {player.position}</a><button className="btn btn-danger" onClick={(e) => this.handleRemovePlayerFromTeam(e, player._id)}>x</button></div>
                     )}
 
                 </div>
-                <div className="col-3"></div>
             </div>
         </div>
     }

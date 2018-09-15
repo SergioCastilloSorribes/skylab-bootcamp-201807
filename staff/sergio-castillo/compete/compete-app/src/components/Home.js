@@ -9,7 +9,11 @@ class Home extends Component {
     }
 
     render() {
-        return <div></div>
+        return <div className="home">
+            <img></img>
+            <img></img>
+            <img></img>
+        </div>
     }
 
 }

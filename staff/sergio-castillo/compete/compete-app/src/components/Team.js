@@ -50,14 +50,12 @@ class Team extends Component {
 
        return <div className="container">
             <div className="row">
-            <div className="col-3"></div>
-            <div className="col-6">
-            <h3>{this.state.team.name}</h3>
-            <span>{this.state.team.description}</span>
-            <AddPlayerToTeam handleAddPlayerToTeam={this.handleAddPlayerToTeam}/>
-            <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
-            </div>
-            <div className="col-3"></div>
+                <div className="col-6" style={{width: '60%', margin: '0 auto'}}>
+                    <h3>{this.state.team.name}</h3>
+                    <span>{this.state.team.description}</span>
+                    <AddPlayerToTeam handleAddPlayerToTeam={this.handleAddPlayerToTeam}/>
+                    <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
+                </div>
             </div>
         </div>
 
