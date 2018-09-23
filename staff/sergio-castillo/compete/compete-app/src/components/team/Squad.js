@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
-import Feedback from '../Feedback'
 
 
 class Squad extends Component {

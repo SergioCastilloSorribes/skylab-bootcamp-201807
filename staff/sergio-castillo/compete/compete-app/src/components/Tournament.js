@@ -4,7 +4,7 @@ import TeamsList from './tournament/TeamsList'
 import AddTeamToTournament from './tournament/AddTeamToTournament'
 import Winner from './tournament/Winner'
 import logic from '../logic'
-import Feedback from './Feedback'
+import Error from './Error'
 import Matches from './tournament/Matches'
 
 
@@ -127,7 +127,7 @@ class Tournament extends Component {
             {this.state.tournament.state === 'playing' && <Matches handleListMatches={this.handleListMatches} matches={this.state.matches} handleAddResult={this.handleAddResult} />}
             {this.state.tournament.state === 'playing' && this.state.tournament.roundMatches === 0 && <button className="btn btn-primary" style={{width:'20%'}}  type="submit" onClick={this.handleCreateNewRound}>Create New Round</button>}
             {this.state.tournament.state === 'finish' && <Winner winners={this.state.tournament.winners} />}
-            {this.state.feedback && <Feedback message={this.state.feedback} />}
+            {this.state.feedback && <Error message={this.state.feedback} />}
 
         </div>
     }

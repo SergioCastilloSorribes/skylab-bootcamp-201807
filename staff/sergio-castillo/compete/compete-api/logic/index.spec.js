@@ -55,7 +55,7 @@ describe('logic', () => {
 
     // Validates
 
-    !true && describe('validate string fields', () => {
+    true && describe('validate string fields', () => {
         it('should succeed on correct value', () => {
             expect(() => logic._validateStringField('email', email).to.equal(email))
             expect(() => logic._validateStringField('password', password).to.equal(password))
@@ -74,7 +74,7 @@ describe('logic', () => {
         })
     })
 
-    !true && describe('validate number fields', () => {
+    true && describe('validate number fields', () => {
         const age = 37
         it('should succeed on correct value', () => {
             expect(() => logic._validateNumberField('age', age).to.equal(age))
@@ -93,7 +93,7 @@ describe('logic', () => {
         })
     })
 
-    !true && describe('validate email fields', () => {
+    true && describe('validate email fields', () => {
         it('should succeed on correct value', () => {
             expect(() => logic._validateEmail('email', email).to.equal(email))
         })
@@ -128,7 +128,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('validate date fields', () => {
+    true && describe('validate date fields', () => {
         const dateOfMatch = new Date()
         it('should succeed on correct date', () => {
             expect(() => logic._validateDateField('date', dateOfMatch).to.equal(dateOfMatch))
@@ -158,7 +158,7 @@ describe('logic', () => {
 
     // USER: register, authenticate, update and unregister
 
-    !true && describe('register user', () => { // PERFECT
+    true && describe('register user', () => { // PERFECT
         it('should register correctly', () =>
             User.findOne({ email })
                 .then(user => {
@@ -231,7 +231,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('authenticate user', () => { // PERFECT
+    true && describe('authenticate user', () => { // PERFECT
         beforeEach(() => User.create({ email, password }))
         let userid
         it('should authenticate correctly', () => {
@@ -298,7 +298,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('update password', () => { // PERFECT
+    true && describe('update password', () => { // PERFECT
         beforeEach(() => User.create({ email, password }))
         const newPassword = '654321'
         let id
@@ -375,7 +375,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('unregister user', () => { // PERFECT
+    true && describe('unregister user', () => { // PERFECT
         beforeEach(() => User.create({ email, password }))
         let id
         const password2 = '654321'
@@ -436,7 +436,7 @@ describe('logic', () => {
 
     // PLAYER: Add user as a player, retrieve user roles, retrieve player data, list my teams as a player, list my tournaments as a player and remove the player role
 
-    !true && describe('add user as a player', () => { // PERFECT
+    true && describe('add user as a player', () => { // PERFECT
         beforeEach(() => User.create({ email, password, role: ['manager'] }))
         it('should add this user as a player correctly', () => {
             return User.findOne({ email })
@@ -709,7 +709,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('retrieve user roles', () => { // PERFECT
+    true && describe('retrieve user roles', () => { // PERFECT
         beforeEach(() => User.create({ email, password, role: 'player', dni, name, surname, age, gender, height, weight, position, squadNumber, photo }))
         it('should retrieve the player information correctly', () =>
             User.findOne({ email })
@@ -746,7 +746,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('retrieve the player information', () => { // TODO: LOOK FOR MORE TESTS
+    true && describe('retrieve the player information', () => { // TODO: LOOK FOR MORE TESTS
         beforeEach(() => User.create({ email, password, role: 'player', dni, name, surname, age, gender, height, weight, position, squadNumber, photo }))
         it('should retrieve the player information correctly', () =>
             User.findOne({ email })
@@ -798,7 +798,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('list my teams as player', () => { // PERFECT
+    true && describe('list my teams as player', () => { // PERFECT
         const teamName = 'FC Barcelona'
         const description = 'Equipo de prueba'
         const owner = 'Sergio Castillo'
@@ -845,7 +845,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('list my tournaments as player', () => { // PERFECT
+    true && describe('list my tournaments as player', () => { // PERFECT
         const teamName = 'FC Barcelona'
         const description = 'Equipo de prueba'
         const owner = 'Sergio Castillo'
@@ -913,7 +913,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('remove the player role', () => { // PERFECT
+    true && describe('remove the player role', () => { // PERFECT
         beforeEach(() => User.create({ email, password, role: ['player', 'manager'] }))
         let id
         const id2 = new ObjectId().toString()
@@ -975,7 +975,7 @@ describe('logic', () => {
 
     // TEAM
 
-    !true && describe('create a team', () => { // PERFECT
+    true && describe('create a team', () => { // PERFECT
         const email2 = 'javilopez@gmail.com'
         const name = 'F.C. Birralona'
         const description = 'Equipo de fútbol sala de la peña Despenyats'
@@ -1092,7 +1092,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('list my teams as manager', () => { // PERFECT
+    true && describe('list my teams as manager', () => { // PERFECT
         const email2 = 'javilopez@gmail.com'
         const name = 'F.C. Birralona'
         const name2 = 'Atletico Fuertaco'
@@ -1148,7 +1148,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('retrieve team data', () => {
+    true && describe('retrieve team data', () => {
         const email2 = 'javilopez@gmail.com'
         const name = 'F.C. Birralona'
         const name2 = 'Atletico Fuertaco'
@@ -1186,7 +1186,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('list players from team', () => {
+    true && describe('list players from team', () => {
         let id, id2, id3, teamId
         const email2 = `FC${Math.random()}@gmail.com`
         const email3 = `Royo${Math.random()}@gmail.com`
@@ -1215,7 +1215,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('remove team', () => {
+    true && describe('remove team', () => {
         const email2 = 'eduberenguer@gmail.com'
         const email3 = 'javirrim@gmail.com'
         const name = 'F.C.Birralona'
@@ -1279,7 +1279,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('search player by query: name, surname or dni', () => {
+    true && describe('search player by query: name, surname or dni', () => {
         const email2 = 'javilopez@gmail.com'
         const dni2 = '36777876R'
         let id2
@@ -1314,7 +1314,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('add player to team', () => {
+    true && describe('add player to team', () => {
         const email2 = 'javilopez@gmail.com'
         const name = 'F.C. Birralona'
         const description = 'Equipo de fútbol sala de la peña Despenyats'
@@ -1357,7 +1357,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('remove player from team', () => {
+    true && describe('remove player from team', () => {
         let id, id2, id3, teamId
         const email2 = `FC${Math.random()}@gmail.com`
         const email3 = `Royo${Math.random()}@gmail.com`
@@ -1390,7 +1390,7 @@ describe('logic', () => {
 
     // TOURNAMENTS
 
-    !true && describe('create tournament', () => {
+    true && describe('create tournament', () => {
         const nameTournament = 'Skylab Tournament'
         const nameTournament2 = 'Liga BBVA'
         const nameTournament3 = 'Premier League'
@@ -1498,7 +1498,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('list all the organizer tournaments', () => {
+    true && describe('list all the organizer tournaments', () => {
         const email2 = 'javilopez@gmail.com'
         const nameTournament = 'La Liga de Skylab'
         const nameTournament2 = 'Pichis in the sky'
@@ -1530,7 +1530,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('list all teams as organizer', () => {
+    true && describe('list all teams as organizer', () => {
         const email2 = 'javilopez@gmail.com'
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}CF`
@@ -1588,7 +1588,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('Add team to tournament', () => {
+    true && describe('Add team to tournament', () => {
         let id, teamId, team2Id, tournamentId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1624,7 +1624,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('Retrieve tournament data', () => {
+    true && describe('Retrieve tournament data', () => {
         let id, teamId, team2Id, tournamentId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1658,7 +1658,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('list teams from tournament', () => {
+    true && describe('list teams from tournament', () => {
         let id, teamId, team2Id, tournamentId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1695,7 +1695,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('start tournament', () => {
+    true && describe('start tournament', () => {
         let id, teamId, team2Id, tournamentId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1733,7 +1733,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('create a new match', () => {
+    true && describe('create a new match', () => {
         let id, teamId, team2Id, tournamentId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1771,7 +1771,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('create new round of the tournament', () => {
+    true && describe('create new round of the tournament', () => {
         let id, teamId, team2Id, team3Id, team4Id, team5Id, team6Id, team7Id, team8Id, tournamentId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1825,7 +1825,7 @@ describe('logic', () => {
     })
 
 
-    !true && describe('add a result of a match', () => {
+    true && describe('add a result of a match', () => {
         let id, teamId, team2Id, team3Id, team4Id, team5Id, team6Id, team7Id, team8Id, tournamentId, matchId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1878,7 +1878,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('retrieve a match data', () => {
+    true && describe('retrieve a match data', () => {
         let id, firstTeamId, secondTeamId, tournamentId, matchId, resultId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1921,7 +1921,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('retrieve a list of matches of a tournament data', () => {
+    true && describe('retrieve a list of matches of a tournament data', () => {
         let id, firstTeamId, secondTeamId, team3Id, team4Id,tournamentId, matchId, match2Id,resultId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -1970,7 +1970,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('Remove team from tournament', () => {
+    true && describe('Remove team from tournament', () => {
         let id, teamId, team2Id, tournamentId
         const name = `FC${Math.random()}`
         const name2 = `${Math.random()}FC`
@@ -2006,7 +2006,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('remove tournament', () => {
+    true && describe('remove tournament', () => {
         const email2 = 'eduberenguer@gmail.com'
         const email3 = 'javirrim@gmail.com'
         const nameTournament = `F.C.${Math.random()}`
@@ -2043,7 +2043,7 @@ describe('logic', () => {
     // OTHERS
 
 
-    !true && describe('list all players', () => {
+    true && describe('list all players', () => {
         const name = 'Sergio'
         const email2 = 'eduberenguer@gmail.com'
         const name2 = 'Edu'
@@ -2066,7 +2066,7 @@ describe('logic', () => {
 
     })
 
-    !true && describe('list all teams of an user', () => { // Se pueden hacer más tests de comprobación
+    true && describe('list all teams of an user', () => { // Se pueden hacer más tests de comprobación
         const email2 = 'jaume@gmail.com'
         const email3 = 'gerard@gmail.com'
         const name = 'F.C.Birralona'
@@ -2095,7 +2095,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('retrieve team information', () => {
+    true && describe('retrieve team information', () => {
         const email2 = 'eduberenguer@gmail.com'
         const email3 = 'javirrim@gmail.com'
         const name = 'F.C.Birralona'
@@ -2124,7 +2124,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('add player to team', () => { // Falta comprobar cosas en el test
+    true && describe('add player to team', () => { // Falta comprobar cosas en el test
         const email2 = 'jaume@gmail.com'
         const email3 = 'gerard@gmail.com'
         const nameTeam = 'F.C.Birralona'
@@ -2160,7 +2160,7 @@ describe('logic', () => {
         )
     })
 
-    !true && describe('remove player from a team', () => { // Falta comprobar cosas en el test
+    true && describe('remove player from a team', () => { // Falta comprobar cosas en el test
         const email2 = 'jaume@gmail.com'
         const email3 = 'gerard@gmail.com'
         const nameTeam = 'F.C.Birralona'
@@ -2195,28 +2195,6 @@ describe('logic', () => {
                 })
         )
     })
-
-    !true && describe('list all tournaments', () => {
-        const nameTournament = 'Skylab Tournament'
-        const nameTournament2 = 'Liga BBVA'
-        const nameTournament3 = 'Premier League'
-        const email2 = 'jaume@gmail.com'
-        const email3 = 'gerard@gmail.com'
-        beforeEach(() => {
-            const users = [{ email, password }, { email: email2, password }, { email: email3, password }]
-            return User.create(users)
-                .then(res => Tournament.create([{ email, password, nameTournament, organizer: res[0]._id }, { email: email2, password, nameTournament: nameTournament2, organizer: res[1]._id }]))
-        })
-        it('should list all tournaments correctly', () =>
-            logic.listAllTournaments()
-                .then(tournaments => {
-                    expect(tournaments).to.exist
-                    expect(tournaments.length).to.equal(2) // Estoy listando todos los campos con lo cual hay que hacer un map
-                })
-        )
-    })
-
-
 
     after(() =>
         Promise.all([

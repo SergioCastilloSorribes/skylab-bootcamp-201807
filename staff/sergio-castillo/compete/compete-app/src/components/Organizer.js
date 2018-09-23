@@ -3,7 +3,6 @@ import { withRouter, Switch } from 'react-router-dom'
 import logic from '../logic'
 import CreateTournament from './organizer/CreateTournament';
 import ListMyTournaments from './organizer/ListMyTournaments';
-import Feedback from './Feedback'
 
 class Organizer extends Component {
     state = {

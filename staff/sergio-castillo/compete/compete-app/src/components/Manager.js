@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import logic from '../logic'
 import CreateTeam from './manager/CreateTeam'
 import ListMyTeams from './manager/ListMyTeams'
-import Feedback from './Feedback'
+import Error from './Error'
 
 
 class Manager extends Component {
@@ -53,7 +53,7 @@ class Manager extends Component {
 
     render() {
         return <div>
-            {this.state.feedback && <Feedback message={this.state.feedback}/>}
+            {this.state.feedback && <Error message={this.state.feedback}/>}
             {<CreateTeam handleCreateTeam={this.handleCreateTeam} />}
             {this.state.manager==='true' && <ListMyTeams handleListMyTeamsAsManager={this.handleListMyTeamsAsManager} handleRemoveTeam={this.handleRemoveTeam} handleGoToTeam={this.handleGoToTeam} />}
         </div>

@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Link, Redirect, Switch } from 'react-router-dom'
 import logic from './logic'
-import Landing from './components/Landing'
+import Landing from './containers/Landing'
 import Home from './components/Home'
 import Player from './components/player/Player'
 import Manager from './components/Manager'
 import Organizer from './components/Organizer'
 import Tournament from './components/Tournament'
 import Team from './components/Team'
-import Profile from './components/Profile'
-import './App.css';
-import Navbar from './components/navbar/Navbar'
-import Nav from './components/navbar/nav'
+import Profile from './containers/Profile'
+import Navbar from './components/Navbar/Navbar'
+import Nav from './components/Navbar/nav'
 
 // En componente App solo debería tener las rutas y las barras de navegaciones
 // Debe haber cinco componentes principales: player, manager, organizer, team y tournament.
@@ -21,41 +20,64 @@ import Nav from './components/navbar/nav'
 // team debe tener la info del equipo, la plantilla para añadir quitar jugadores con un modal q muestre su info y un campo para hacer alineaciones.
 // torneo: debe tener una lista donde añadir y quitar equipos con un modal para su info, y start tournament: q debe mirar el numero de equipos y pintar el torneo ya.
 // Si hay ronda previa pinta la ronda y una vez resuelta pinta el cuadro completo: segun vamos añadiendo equipos al cuadro al pintar su resultado se crea el partido.
-// 
+// Es muy importante hacer como Gio -> Tener una base de datos de test y otra buena, para que la de test no te borre los datos.
 
 class App extends Component {
   state = {
+    feedbackRegister: '',
+    errorRegister: '',
+    errorAuthenticate: '',
     id: sessionStorage.getItem('id') || '',
     token: sessionStorage.getItem('token') || '',
     player: false,
     manager: false,
     organizer: false,
     teamId: "",
-    role: ""
+    role: "",
+
   }
 
   isLoggedIn = () => {
     return !!this.state.id
   }
 
-  handleLogin = (id, token) => {
-    this.setState({
-      id,
-      token
-    })
-    sessionStorage.setItem('id', id)
-    sessionStorage.setItem('token', token)
-    logic.retrieveUserRoles(this.state.id, this.state.token)
-      .then(roles => {
-        for (let i = 0; i < roles.roles.length; i++) {
-          if (roles.roles[i] === 'player') this.setState({ player: true })
-          if (roles.roles[i] === 'manager') this.setState({ manager: true })
-          if (roles.roles[i] === 'organizer') this.setState({ organizer: true })
-        }
-        sessionStorage.setItem('player', this.state.player)
-        sessionStorage.setItem('manager', this.state.manager)
-        sessionStorage.setItem('organizer', this.state.organizer)
-        this.props.history.push('/home')
+  handleRegister = (email, password) => {
+    return logic.register(email, password)
+      .then(({ message }) => {
+        this.setState({ feedbackRegister: message })
+        return true
+      })
+      .catch(({ message }) => {
+        this.setState({ errorRegister: message })
+        return false
+      })
+
+  }
+
+  handleAuthenticate = (email, password) => {
+    logic.authenticate(email, password)
+      .then(res => {
+        this.setState({
+          id: res.id,
+          token: res.token
+        })
+        sessionStorage.setItem('id', res.id)
+        sessionStorage.setItem('token', res.token)
+        logic.retrieveUserRoles(this.state.id, this.state.token)
+          .then(roles => {
+            for (let i = 0; i < roles.roles.length; i++) {
+              if (roles.roles[i] === 'player') this.setState({ player: true })
+              if (roles.roles[i] === 'manager') this.setState({ manager: true })
+              if (roles.roles[i] === 'organizer') this.setState({ organizer: true })
+            }
+            sessionStorage.setItem('player', this.state.player)
+            sessionStorage.setItem('manager', this.state.manager)
+            sessionStorage.setItem('organizer', this.state.organizer)
+            this.props.history.push('/home')
+          })
+      })
+      .catch(({ message }) => {
+        this.setState({ errorAuthenticate: message })
       })
   }
 
@@ -105,16 +127,17 @@ class App extends Component {
       organizer: false,
     })
     sessionStorage.clear()
+    this.props.history.push('/')
   }
 
   render() {
-    return <div className="App">
-      <Navbar isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout} />
+    return <main className="App">
+      {this.isLoggedIn() && <Navbar isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout} />}
       <div className="App__header">
         {this.isLoggedIn() && <Nav handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleOrganizer={this.handleOrganizer} />}
       </div>
       <Switch>
-        <Route exact path="/" render={() => this.isLoggedIn() ? <Redirect to="/home" /> : <Landing handleLogin={this.handleLogin} />} />
+        <Route exact path="/" render={() => this.isLoggedIn() ? <Redirect to="/home" /> : <Landing handleRegister={this.handleRegister} handleAuthenticate={this.handleAuthenticate} feedbackRegister={this.state.feedbackRegister} message={this.state.errorRegister} errorAuthenticate={this.state.errorAuthenticate} />} />
         <Route path="/home" render={() => this.isLoggedIn() ? <Home handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleTournament={this.handleTournament} /> : <Landing handleLogin={this.handleLogin} />} />
         <Route path="/profile" render={() => this.isLoggedIn() ? <Profile /> : <Landing handleLogin={this.handleLogin} />} />
         <Route path="/player" render={() => this.isLoggedIn() ? <Player player={this.state.player} handleGoToTeam={this.handleGoToTeam} /> : <Redirect to="/" />} />
@@ -123,7 +146,7 @@ class App extends Component {
         <Route path="/team" render={() => this.isLoggedIn() ? <Team handleRetrieveTeam={this.handleRetrieveTeam} /> : <Redirect to="/home" />} />
         <Route path="/tournament" render={() => this.isLoggedIn() ? <Tournament handleRetrieveTournament={this.handleRetrieveTournament} handleListTeamsFromTournament={this.handleListTeamsFromTournament} /> : <Redirect to="/home" />} />
       </Switch>
-    </div>
+    </main>
   }
 }
 

@@ -1,0 +1,41 @@
+.Authenticate {
+  max-width: 350px;
+  margin: 0 auto;
+  margin-top: 150px;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  padding: 30px 40px 40px;
+  margin-bottom: 15px;
+  border-radius: 0.5em;
+}
+.Authenticate-logoWrapper {
+  text-align: center;
+  margin-bottom: 1em;
+}
+.Authenticate-logo {
+  width: 180px;
+}
+.Authenticate-formError {
+  font-size: 0.8em;
+  margin-top: 15px;
+  color: tomato;
+}
+.Authenticate-field {
+  margin-bottom: 8px;
+}
+.Authenticate-fieldError {
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: tomato;
+}
+.Authenticate-input {
+  display: block;
+  padding: 10px 7px;
+  border-radius: 3px;
+  background-color: #f0f0f0;
+  border: 1px solid #dbdbdb;
+  font-size: 0.8rem;
+  width: 95%;
+}
+
+/*# sourceMappingURL=Authenticate.css.map */

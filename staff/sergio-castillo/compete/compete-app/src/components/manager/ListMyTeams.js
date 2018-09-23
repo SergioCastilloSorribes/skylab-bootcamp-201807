@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import './ListMyTeams.css'
-import Feedback from '../Feedback'
+import Error from '../Error'
 
 class ListMyTeams extends Component {
 
@@ -66,7 +66,7 @@ class ListMyTeams extends Component {
                 <h3>MY TEAMS AS MANAGER</h3>
                 {this.state.teams.map(team =><div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{team.name}</a><button className="btn btn-danger" onClick={(e)=>this.removeTeam(e,team._id)}>x</button></div>
                 )}
-                {this.state.feedbacklist && <Feedback />}
+                {this.state.feedbacklist && <Error />}
                 
                 </div>
                 <div className="col-3"></div>

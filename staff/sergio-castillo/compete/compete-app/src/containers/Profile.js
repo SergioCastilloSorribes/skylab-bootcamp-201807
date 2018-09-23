@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ProfilePanel from '../components/ProfilePanel'
 
 
 class Profile extends Component {
@@ -61,7 +62,7 @@ class Profile extends Component {
         return (
             <div className="profile">
                 <div className="profile__change-password">
-                    <h3 className="profile__text"> Change password </h3>
+                    <h3 className="profile__text"> Change the password </h3>
                     <input type="password" className="profile__input" placeholder=" password" onChange={keepPassword2}></input>
                     <input type="password" className="profile__input" placeholder=" password" onChange={keepPassword2}></input>
                     <input type="password" className="profile__input" placeholder=" new password" onChange={keepNewPassword}></input>

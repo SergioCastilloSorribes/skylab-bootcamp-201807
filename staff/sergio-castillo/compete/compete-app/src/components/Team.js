@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import Squad from './team/Squad'
 import AddPlayerToTeam from './team/AddPlayerToTeam'
 import logic from '../logic'
-import Feedback from './Feedback'
 
 
 class Team extends Component {

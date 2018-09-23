@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
 import AddPlayer from './AddPlayer'
 import PlayerData from './PlayerData'
-import Feedback from '../Feedback'
+import Error from '../Error'
 import ListMyTeamsAsPlayer from './ListMyTeamsAsPlayer'
 import ListMyTournamentsAsPlayer from './ListMyTournamentsAsPlayer'
 
@@ -82,11 +82,11 @@ class Player extends Component {
     render() {
         return <div>
             {!this.isPlayerIn() && <AddPlayer handleAddPlayer={this.handleAddPlayer} />}
-            {!this.isPlayerIn() && <Feedback message={this.state.feedbackAddPlayer} />}
+            {!this.isPlayerIn() && <Error message={this.state.feedbackAddPlayer} />}
             {this.isPlayerIn() && <PlayerData handleRetrievePlayer={this.handleRetrievePlayer} />}
             {this.isPlayerIn() && <button style={{width: '15%', margin: '-120px 0 0 0'}} onClick={this.handleRemovePlayer} className="btn btn-primary">Remove user as a player</button>}
             {this.isPlayerIn() &&  <ListMyTeamsAsPlayer handleListMyTeamsAsPlayer={this.handleListMyTeamsAsPlayer} handleGoToTeam={this.handleGoToTeam} />}
-            {this.isPlayerIn() && <Feedback message={this.state.feedbackRemoveRole} />}
+            {this.isPlayerIn() && <Error message={this.state.feedbackRemoveRole} />}
         </div>
     }
 }
