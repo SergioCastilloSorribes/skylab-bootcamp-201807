@@ -44,11 +44,17 @@ class Authenticate extends Component {
       this.setState({
         emailError: '',
         passwordError: '',
-        confirmPasswordError: ''
       })
     }
 
   }
+
+  componentWillUnmount(){
+    this.setState({
+        emailError: '',
+        passwordError: ''
+    })
+}
 
   render() {
     return (
@@ -72,9 +78,6 @@ class Authenticate extends Component {
             }
           </div>
           <button type="submit" className="button is-primary is-fullwidth">Log in</button>
-          {
-            this.props.error && <div className="Authenticate-formError">{this.props.error}</div>
-          }
           {
             this.props.message && <Error message={this.props.message} />
           }

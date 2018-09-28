@@ -1,6 +1,7 @@
-# NutriLab v.1.0.0
+# Compete v.1.0.0
 
-NutriLab is an application to search ingredients and show their nutritional information.
+Compete is an application to manage and organize players, teams and tournaments in knockout mode. It will be developed for the presentation of the final project of the bootcamp in Skylab Coders.
+
 
 **DOCUMENTATION**
 

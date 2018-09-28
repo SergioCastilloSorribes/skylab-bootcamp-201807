@@ -126,6 +126,16 @@ const logic = {
             })
     },
 
+    /**
+     * Upload photo
+     * @param {string} photo 
+     */
+    uploadPlayerPhoto(photo) {
+        return this._call('upload', 'PATCH', {'content-type': 'application/json' }, JSON.stringify({base64Image: photo}), 200)
+            .then(res => res.json())
+            .then(({ photo }) => photo)
+    },
+
     retrieveUserRoles(id, token) {
         return Promise.resolve()
             .then(() => {

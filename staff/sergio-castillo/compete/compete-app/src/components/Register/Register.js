@@ -62,6 +62,14 @@ class Register extends Component {
         }
     }
 
+    componentWillUnmount(){
+        this.setState({
+            emailError: '',
+            passwordError: '',
+            confirmPasswordError: ''
+        })
+    }
+
     render() {
         return (
             <section className="Register">
@@ -84,16 +92,13 @@ class Register extends Component {
                         }
                     </div>
                     <div className="Register-field">
-                        <input type="password" className="Register-input" name="confirmPassword" placeholder="Repeat Password" id="password" onChange={this.handleChange} />
+                        <input type="password" className="Register-input" name="confirmPassword" placeholder="Repeat Password" id="repeatpassword" onChange={this.handleChange} />
                         {
                             this.state.confirmPasswordError &&
                             <div className="Register-fieldError">{this.state.confirmPasswordError}</div>
                         }
                     </div>
                     <button type="submit" className="button is-primary is-fullwidth">Register</button>
-                    {
-                        this.props.error && <div className="Register-formError">{this.props.error}</div>
-                    }
                     {
                         this.props.message && <Error message={this.props.message} />
                     }

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Squad from './team/Squad'
 import AddPlayerToTeam from './team/AddPlayerToTeam'
 import logic from '../logic'
+import './Team.css'
 
 
 class Team extends Component {
@@ -17,7 +18,9 @@ class Team extends Component {
         feedbackretrieve:undefined,
         team: [],
         players:[],
-        res:[]
+        res:[],
+        listPlayersError: '',
+        addPlayerToTeamError: ''
     }
 
     componentDidMount() {
@@ -34,6 +37,7 @@ class Team extends Component {
                 this.setState({players})
                 return players
             })
+            .catch(({message})=> this.setState({listPlayersError: message}))
     }
 
     handleAddPlayerToTeam = ( playerId) => {
@@ -43,29 +47,21 @@ class Team extends Component {
                 this.handleListPlayersFromTeam()
                 return true
             })
+            .catch(({message})=> this.setState({addPlayerToTeamError: message}))
     }
 
     render() {
 
-       return <div className="container">
-            <div className="row">
-                <div className="col-6" style={{width: '60%', margin: '0 auto'}}>
-                    <h3>{this.state.team.name}</h3>
-                    <span>{this.state.team.description}</span>
-                    <AddPlayerToTeam handleAddPlayerToTeam={this.handleAddPlayerToTeam}/>
-                    <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
-                </div>
+       return <article className="Team-container">
+            <div className="Team-title">
+            <h3>{this.state.team.name}</h3>
+            <span>{this.state.team.description}</span>
             </div>
-        </div>
-
-
-        // return <div>
-        //     {this.state.feedbackretrieve && <Feedback message={this.state.feedbackretrieve}/>}
-        //     <h3>{this.state.team.name}</h3>
-        //     {this.state.team.description}
-        //     <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
-        //     <AddPlayerToTeam />
-        // </div>
+            <div className="Team">
+                <AddPlayerToTeam handleAddPlayerToTeam={this.handleAddPlayerToTeam}/>
+                <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
+            </div>
+        </article>
     }
 }
 export default withRouter(Team)

@@ -1,0 +1,68 @@
+.header
+    background-color: #3C3B3D
+    z-index: 4
+    text-align: center
+    height: 3em
+    
+    &__container
+        padding-top: 0.3em
+        margin-left: auto
+        margin-right: auto
+        width: 70%
+        display: inline-flex
+        flex-direction: row
+        overflow: hidden
+        justify-content: space-between
+
+
+a.header__title
+    color: #fff
+    text-decoration: none
+    font-size: 2em
+    font-family: 'Montserrat'
+    height: 1.2em
+
+
+.nav-account 
+    list-style: none
+    display: inline-flex
+
+
+ul.nav-account 
+    margin-bottom: 0
+
+
+.nav-account .nav-account__item 
+    text-transform: uppercase
+    font-weight: 700
+    font-family: "Exo 2", sans-serif
+    font-size: 0.6em
+    line-height: 2.2em
+    margin-left: 1em
+  
+
+.nav-account .nav-account__item > a 
+    color: #fff
+    -webkit-transition: all 0.3s ease
+    transition: all 0.3s ease
+    display: inline-block
+  
+
+.nav-account .nav-account__item > a:hover 
+    color: #6bb1d6
+  
+.nav-account .nav-account__item > a:focus 
+    outline: none
+  
+.nav-account .nav-account__item > a .highlight 
+    color: #6bb1d6
+  
+.nav-account .nav-account__item:last-child::before 
+    display: none
+  
+.nav-account .nav-account__item.has-children 
+    position: relative
+  
+.main-nav__sub
+    width: 0em
+    overflow: hidden

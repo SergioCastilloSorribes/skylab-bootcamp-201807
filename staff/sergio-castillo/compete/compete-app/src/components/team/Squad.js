@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
+import './Squad.css'
+import Error from '../Error'
 
 
 class Squad extends Component {
@@ -13,7 +15,8 @@ class Squad extends Component {
         role: sessionStorage.getItem('role'),
         teamId: sessionStorage.getItem('teamId'),
         squad: [],
-        players: []
+        players: [],
+        removePlayerError: ''
     }
 
     componentDidMount() {
@@ -30,23 +33,31 @@ class Squad extends Component {
             })
     }
 
-    handleRemovePlayerFromTeam = (e, playerId) => {
-        e.preventDefault()
+    handleRemovePlayerFromTeam = (event, playerId) => {
+        event.preventDefault()
         logic.removePlayerFromTeam(this.state.id, this.state.token, this.state.teamId, playerId)
+            .catch(({ message }) => this.setState({ removePlayerError: message }))
     }
 
     render() {
 
-        return <div className="container">
-            <div className="row">
-                <div className="col-12">
-                    <h3>SQUAD</h3>
-                    {this.state.squad.map(player => <div className="message-header"><a href="#" className="list-group-item list-group-item-action">{player.dni} {player.name} {player.surname} {player.position}</a><button className="btn btn-danger" onClick={(e) => this.handleRemovePlayerFromTeam(e, player._id)}>x</button></div>
-                    )}
-
-                </div>
+        return <aside className="ListMyTeams">
+            <div className="ListMyTeams-title-wraper">
+                <h3 className="ListMyTeams-title">My squad</h3>
             </div>
-        </div>
+            <div className="ListMyTeams-field">
+                {
+                    this.state.squad.map(player =>
+                        <div className="ListMyTeams-input">
+                            <img className="ListMyTeams-input-photo" src={player.photo} />
+                            <a href="" className="ListMyTeams-input-text">{player.squadNumber}.  {player.name} {player.surname}  /  {player.position}</a>
+                            <a href="#" className="ListMyTeams-input-delete" onClick={(event) => this.handleRemovePlayerFromTeam(event, player._id)}>[x]</a>
+                        </div>
+                    )
+                }
+
+            </div>
+        </aside>
     }
 }
 export default withRouter(Squad)

@@ -1,88 +1,47 @@
 import React, { Component } from 'react'
+import { Route, withRouter, Link, Redirect, Switch } from 'react-router-dom'
 import ProfilePanel from '../components/ProfilePanel'
+import RemoveUser from '../components/RemoveUser'
+import logic from '../logic'
 
+// Funciona pero hay que arreglar cosas de errores y tal.
 
 class Profile extends Component {
 
     state = {
-        password1: null,
-        password2: null,
-        password3: null,
-        newUsername: null,
-        newPassword: null,
-        deleteError: null,
-        update1: null,
-        update2: null
+        id: sessionStorage.getItem('id') || '',
+        token: sessionStorage.getItem('token') || '',
+        removeError: '',
+        updateError: '',
+        passwordUpdated:''
     }
 
-    keepPassword1 = event => this.setState({ password1: event.target.value })
-    keepPassword2 = event => this.setState({ password2: event.target.value })
-    keepPassword3 = event => this.setState({ password3: event.target.value })
-    keepNewUsername = event => this.setState({ newUsername: event.target.value })
-    keepNewPassword = event => this.setState({ newPassword: event.target.value })
-    
     /** This is the function to update the user password */
-    updatePassword = () => {
-        this.props.updateUser(this.state.password2, '', this.state.newPassword)
-            .then(() => this.setState({ update2: 'success' }))
-            .catch(err => this.setState({ update2: err.message }))
-    }
-
-    /** This is the function to update the user username/password */
-    updateUsername = () => {
-        this.props.updateUser(this.state.password1, this.state.newUsername, this.state.password1)
-            .then(() => this.setState({ update1: 'success' }))
-            .catch(err => this.setState({ update1: err.message }))
+    handleUpdatePassword = (password, newPassword) => {
+        logic.updateProfile(this.state.id, this.state.token, password, newPassword)
+            .then(({ message }) => {
+                this.setState({ passwordUpdated: message })
+            })
+            .catch(({ message }) => this.setState({ updateError: message }))
     }
 
     /** This is the function to delete the user */
-    deleteUser = () => {
-        this.props.deleteUser(this.state.password3)
-            .catch(err => {
-                this.setState({ deleteError: err.message })
+    handleRemoveUser = (e, password) => {
+        logic.unregisterUser(this.state.id, this.state.token, password)
+            .then(() => {
+                this.props.handleLogout(e)
+            })
+            .catch(({ message }) => {
+                this.setState({ removeError: message })
             })
     }
 
     render() {
-
-        const {
-            state: {
-                update1,
-                update2,
-                deleteError
-            },
-            keepPassword1,
-            keepPassword2,
-            keepPassword3,
-            keepNewPassword,
-            updatePassword,
-            deleteUser
-        } = this
-
-        return (
-            <div className="profile">
-                <div className="profile__change-password">
-                    <h3 className="profile__text"> Change the password </h3>
-                    <input type="password" className="profile__input" placeholder=" password" onChange={keepPassword2}></input>
-                    <input type="password" className="profile__input" placeholder=" password" onChange={keepPassword2}></input>
-                    <input type="password" className="profile__input" placeholder=" new password" onChange={keepNewPassword}></input>
-                    <div>
-                        {update2 === 'success' ? <p className="profile__text--success">{update2}</p> : <p className="profile__text--error">{update2}</p>}
-                    </div>
-                    <button type="password" className="profile__btn" onClick={updatePassword}> Update </button>
-                </div>
-                <div className="profile__delete">
-                    <h3 className="profile__text"> Delete account </h3>
-                    <input type="password" className="profile__input" placeholder=" password" onChange={keepPassword3}></input>
-                    <div>
-                        {deleteError && <p className="profile__text--error">{deleteError}</p>}
-                    </div>
-                    <button className="profile__btn" onClick={deleteUser}> Delete </button>
-                </div>
-                <button onClick={this.props.onLogout} className="profile__btn profile__btn--logout"> Log out </button>
-            </div>
-        )
+        return <article>
+            <ProfilePanel handleUpdatePassword={this.handleUpdatePassword} message={this.state.updateError} passwordUpdated={this.state.passwordUpdated}/>
+            <RemoveUser handleRemoveUser={this.handleRemoveUser} message={this.state.removeError} />
+        </article>
     }
 }
 
-export default Profile
+export default withRouter(Profile)

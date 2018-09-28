@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Route, withRouter, Link, Redirect, Switch } from 'react-router-dom'
 import logic from './logic'
 import Landing from './containers/Landing'
+import Header from './components/Header'
+import Profile from './containers/Profile'
 import Home from './components/Home'
-import Player from './components/player/Player'
-import Manager from './components/Manager'
-import Organizer from './components/Organizer'
+import Player from './containers/Player'
+import Manager from './containers/Manager'
+import Organizer from './containers/Organizer'
 import Tournament from './components/Tournament'
 import Team from './components/Team'
-import Profile from './containers/Profile'
-import Navbar from './components/Navbar/Navbar'
-import Nav from './components/Navbar/nav'
+import Nav from './components/Nav/Nav'
 
 // En componente App solo debería tener las rutas y las barras de navegaciones
 // Debe haber cinco componentes principales: player, manager, organizer, team y tournament.
@@ -44,7 +44,10 @@ class App extends Component {
   handleRegister = (email, password) => {
     return logic.register(email, password)
       .then(({ message }) => {
-        this.setState({ feedbackRegister: message })
+        this.setState({ 
+          feedbackRegister: message,
+          errorRegister: ''
+        }) 
         return true
       })
       .catch(({ message }) => {
@@ -59,7 +62,8 @@ class App extends Component {
       .then(res => {
         this.setState({
           id: res.id,
-          token: res.token
+          token: res.token,
+          errorAuthenticate: ''
         })
         sessionStorage.setItem('id', res.id)
         sessionStorage.setItem('token', res.token)
@@ -132,14 +136,12 @@ class App extends Component {
 
   render() {
     return <main className="App">
-      {this.isLoggedIn() && <Navbar isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout} />}
-      <div className="App__header">
-        {this.isLoggedIn() && <Nav handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleOrganizer={this.handleOrganizer} />}
-      </div>
+      {this.isLoggedIn() && <Header isLoggedIn={this.isLoggedIn} handleLogout={this.handleLogout} />}
+      {this.isLoggedIn() && <Nav handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleOrganizer={this.handleOrganizer} />}
       <Switch>
         <Route exact path="/" render={() => this.isLoggedIn() ? <Redirect to="/home" /> : <Landing handleRegister={this.handleRegister} handleAuthenticate={this.handleAuthenticate} feedbackRegister={this.state.feedbackRegister} message={this.state.errorRegister} errorAuthenticate={this.state.errorAuthenticate} />} />
         <Route path="/home" render={() => this.isLoggedIn() ? <Home handlePlayer={this.handlePlayer} handleManager={this.handleManager} handleTournament={this.handleTournament} /> : <Landing handleLogin={this.handleLogin} />} />
-        <Route path="/profile" render={() => this.isLoggedIn() ? <Profile /> : <Landing handleLogin={this.handleLogin} />} />
+        <Route path="/profile" render={() => this.isLoggedIn() ? <Profile handleLogout={this.handleLogout}/> : <Landing handleLogin={this.handleLogin} />} />
         <Route path="/player" render={() => this.isLoggedIn() ? <Player player={this.state.player} handleGoToTeam={this.handleGoToTeam} /> : <Redirect to="/" />} />
         <Route path="/manager" render={() => this.isLoggedIn() ? <Manager handleGoToTeam={this.handleGoToTeam} /> : <Redirect to="/" />} />
         <Route path="/organizer" render={() => this.isLoggedIn() ? <Organizer handleGoToTournament={this.handleGoToTournament} /> : <Redirect to="/" />} />

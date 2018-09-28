@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
+import Error from '../Error'
+import './AddTeamToTournament.css'
 
 class AddTeamToTournament extends Component {
     state = {
@@ -11,8 +13,9 @@ class AddTeamToTournament extends Component {
         organizer: sessionStorage.getItem('organizer'),
         tournamentId: sessionStorage.getItem('tournamentId'),
         teams: [],
-        name:"",
-        role: ""
+        name: "",
+        role: "",
+        listAllTeamsError:''
     }
 
     componentDidMount() {
@@ -29,9 +32,10 @@ class AddTeamToTournament extends Component {
     handleListTeams = (e) => {
         e.preventDefault()
         logic.listAllTeamsAsOrganizer(this.state.id, this.state.token)
-        .then(teams=> {
-            this.setState({teams})
-        })
+            .then(teams => {
+                this.setState({ teams })
+            })
+            .catch(({ message }) => this.setState({ listAllTeamsError: message }))
     }
 
     handleAddTeamToTournament = (e, teamId) => {
@@ -40,17 +44,26 @@ class AddTeamToTournament extends Component {
     }
 
     render() {
-        return <div>
-            <div className="col-8" style={{width: '22%', margin: '50px auto 0 auto'}}>
-            {this.state.role === 'organizer' && <form onSubmit={this.handleListTeams}>
-                <input style={{margin: '0 auto 20px auto'}} className="form-control" type="text" name="name" placeholder="Introduce name" value={this.state.name} onChange={this.handleChange} />
-                <button className="btn btn-primary" type="submit">Search Teams</button>
-            </form>}
-            {this.state.role==='organizer' && <ul style={{margin: '50px 0', listStyle: 'none', textAlign: 'left'}}>
-                {this.state.teams.map(team => <li style={{padding: '0'}} key={team.id}>{team.name} <a href="" onClick={(e) => this.handleAddTeamToTournament(e, team.id)}>Add to tournament</a> </li>)}
-            </ul>}
+
+        return <aside className="AddTeamToTournament">
+            <div className="AddTeamToTournament-title-wraper">
+                <h3 className="AddTeamToTournament-title">Teams</h3>
             </div>
-        </div>
+            <div className="AddTeamToTournament-field">
+                {this.state.role === 'organizer' && <form onSubmit={this.handleListTeams}>
+                    <button className="listallteams is-primary is-fullwidt" type="submit">List all teams</button>
+                </form>}
+                {this.state.role === 'organizer' && <div>
+                    {
+                        this.state.teams.map(team =>
+                            <div className="ListMyTeams-input">
+                                <a href="#" className="ListMyTeams-input-text" onClick={(e) => this.handleAddTeamToTournament(e, team.id)}>{team.name}</a>
+                            </div>
+                        )
+                    }            </div>}
+            </div>
+            {this.state.listAllTeamsError && <Error message={this.state.listAllTeamsError} />}
+        </aside>
     }
 }
 export default withRouter(AddTeamToTournament)

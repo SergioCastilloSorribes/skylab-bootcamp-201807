@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import './ListMyTournaments.css'
 import logic from '../../logic'
 
 class ListMyTournaments extends Component {
@@ -48,26 +49,30 @@ class ListMyTournaments extends Component {
             })
     }
 
-    handleGoToTournament = (e, tournamentId) => {
-        e.preventDefault()
+    handleGoToTournament = (event, tournamentId) => {
+        event.preventDefault()
         this.props.handleGoToTournament(tournamentId)
     }
 
 
     render() {
 
-        return <div className="container">
-            <div className="row">
-            <div className="col-3"></div>
-            <div className="col-6">
-                <h3>MY TEAMS AS ORGANIZER</h3>
-                {this.state.tournaments.map(tournament =><div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTournament(e, tournament.id)}>{tournament.name}</a><button className="btn btn-danger" onClick={(e)=>this.handleRemoveTournament(e,tournament.id)}>x</button></div>
-                )}
-                
-                </div>
-                <div className="col-3"></div>
+        return <aside className="ListMyTournaments">
+            <div className="ListMyTournaments-title-wraper">
+                <h3 className="ListMyTournaments-title">My tournaments</h3>
             </div>
-        </div>
+            <div className="ListMyTournaments-field">
+            {
+                this.state.tournaments.map(tournament => 
+                    <div className="ListMyTournaments-input">
+                        <a href="#" className="ListMyTournaments-input-text" onClick={(event) => this.handleGoToTournament(event, tournament.id)}>{tournament.name}</a>
+                        <a href="#" className="ListMyTournaments-input-delete" onClick={(event)=>this.handleRemoveTournament(event,tournament.id)}>[x]</a>
+                    </div>
+                )
+            }
+
+            </div>
+        </aside>
     }
 }
 

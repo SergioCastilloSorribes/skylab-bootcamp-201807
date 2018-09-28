@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import logic from '../../logic'
+import Error from '../Error'
+import './CreateTournament.css'
 
 class CreateTournament extends Component {
-
 
     state = {
         id: sessionStorage.getItem('id') || '',
         token: sessionStorage.getItem('token') || '',
         name: "",
+        tournamentNameError: ""
     }
 
     handleChange = (e) => {
@@ -26,22 +27,24 @@ class CreateTournament extends Component {
 
     render() {
 
-        return <div className="container">
-        <div className="row">
-            <div className="col-3"></div>
-            <div className="col-6">
-                <h3>CREATE TOURNAMENT</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label className="text-color" for="exampleFormControlInput1">Name</label>
-                        <input autoFocus type="string" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="name" placeholder="Introduce the name of the tournament" />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Create tournament</button>
-                </form>
+        return <section className="CreateTournament">
+            <div className="CreateTournament-title-wraper">
+                <h3 className="CreateTournament-title">Create tournament</h3>
             </div>
-            <div className="col-3"></div>
-        </div>
-    </div>
+            <form className="CreateTournament-form" onSubmit={this.handleSubmit}>
+                <div className="CreateTournament-field">
+                    <input type="text" className="CreateTournament-input" name="name" placeholder="Introduce your tournament name" id="tournamentname" onChange={this.handleChange} />
+                    {
+                        this.state.tournamentNameError &&
+                        <div className="CreateTournament-fieldError">{this.state.tournamentNameError}</div>
+                    }
+                </div>
+                <button type="submit" className="button is-primary is-fullwidth">Create tournament</button>
+                    {
+                        this.props.message && <Error message={this.props.message} />
+                    }
+            </form>
+        </section>
 
     }
 

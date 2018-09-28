@@ -13,30 +13,38 @@ class PlayerData extends Component {
     }
 
     componentDidMount() {
-      this.props.handleRetrievePlayer()
-        .then(({user})=> {
-            this.setState({user})
-        })
+        this.props.handleRetrievePlayer()
+            .then(({ user }) => {
+                this.setState({ user })
+            })
+    }
+
+    handleRemovePlayer = (e) => {
+        e.preventDefault()
+        this.props.handleRemovePlayer(e)
     }
 
     render() {
 
-        return <div>
-            <h3>Ficha del Jugador</h3>
-            <div className="ficha">
-                <img src='https://res.cloudinary.com/sergiocastillo/image/upload/v1536401305/Compete/26622.jpg' height='100px' weight='100px'/>
-                <ul>
-                    <li>DNI: {this.state.user.dni}</li>
-                    <li>Player: {this.state.user.name} {this.state.user.surname}</li>
-                    <li>Gender: {this.state.user.gender}</li>
-                    <li>Age: {this.state.user.age}</li>
-                    <li>Height: {this.state.user.height} cm</li>
-                    <li>Weight: {this.state.user.weight} kg</li>
-                    <li>Position: {this.state.user.position}</li>
-                </ul>
-            </div>
-        </div>
-
+        return <article className="PlayerData">
+            <figure class="snip1559">
+                <div class="profile-image"><img src={this.state.user.photo} alt="profile-sample2" /></div>
+                <figcaption>
+                    <h3>{this.state.user.dni}</h3>
+                    <h3>{this.state.user.name} {this.state.user.surname}</h3>
+                    <h5>{this.state.user.position}</h5>
+                    <p>Gender: {this.state.user.gender}</p>
+                    <p>Age: {this.state.user.age}</p>
+                    <p>Height: {this.state.user.height} cm</p>
+                    <p>Weight: {this.state.user.weight} kg</p>
+                    <div class="icons"><a href="#"><i class="ion-social-reddit"></i></a>
+                        <a href="#"> <i class="ion-social-twitter"></i></a>
+                        <a href="#"> <i class="ion-social-vimeo"></i></a>
+                    </div>
+                </figcaption>
+                <button type="submit" onClick={this.handleRemovePlayer} className="button is-primary is-fullwidth">Remove player</button>
+            </figure>
+        </article>
     }
 
 }

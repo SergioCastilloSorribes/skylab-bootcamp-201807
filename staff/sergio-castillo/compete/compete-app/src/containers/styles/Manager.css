@@ -1,0 +1,9 @@
+h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.Manager{
+    display: inline-flex;
+    width: 70%;
+}

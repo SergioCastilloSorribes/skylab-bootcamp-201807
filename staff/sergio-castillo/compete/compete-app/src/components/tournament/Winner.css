@@ -1,0 +1,68 @@
+.Winner {
+    max-width: 350px;
+    margin: 0 auto;
+    margin-top: 2em;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 30px 40px 40px;
+    margin-bottom: 15px;
+    border-radius: 0.5em;
+    width: 350px;
+  }
+  .Winner-title {
+    color: #3c3b3d;
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .Winner-formError {
+    font-size: 0.8em;
+    margin-top: 15px;
+    color: tomato;
+  }
+  .Winner-field {
+    margin-bottom: 8px;
+  }
+  .Winner-fieldError {
+    font-size: 0.8em;
+    margin-top: 5px;
+    color: tomato;
+  }
+  .Winner-input {
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 10px 7px;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+    border: 1px solid #dbdbdb;
+    font-size: 0.8rem;
+    width: 95%;
+    margin-bottom: 0.7em;
+  }
+
+  .Winner-input-text{
+    color: #3C3B3D;
+    text-transform: uppercase;
+  }
+
+  .Winner-input-text:hover{
+    color: #6bb1d6;
+  }
+
+  .Winner-input-delete{
+    color: #3C3B3D;
+  }
+  .Winner-input-delete:hover{
+    color: tomato;
+  }
+
+  img.Winner-input-photo {
+    width: 3em;
+    height: 3em;
+    border-radius: 1.5em;
+    
+  }
+
+  span.congrats {
+      margin-bottom: 1em;
+  }
+  

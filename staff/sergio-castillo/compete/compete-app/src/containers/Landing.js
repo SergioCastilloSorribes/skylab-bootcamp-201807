@@ -12,8 +12,10 @@ class Landing extends Component {
 
     handleRegister = (email, password) => {
         this.props.handleRegister(email, password)
-            .then(() => {
-                this.setState({ register: true })
+            .then(res => {
+                if (res == true){
+                    this.setState({ register: true })
+                }
             })
     }
 

@@ -1,0 +1,68 @@
+.ProfilePanel {
+  max-width: 350px;
+  margin: 0 auto;
+  margin-top: 2em;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  padding: 30px 40px 40px;
+  margin-bottom: 15px;
+  border-radius: 0.5em;
+}
+.ProfilePanel-title {
+  color: #3c3b3d;
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+}
+.ProfilePanel-logoWrapper {
+  text-align: center;
+  margin-bottom: 1em;
+}
+.ProfilePanel-logo {
+  width: 180px;
+}
+.ProfilePanel-formError {
+  font-size: 0.8em;
+  margin-top: 15px;
+  color: tomato;
+}
+.ProfilePanel-field {
+  margin-bottom: 8px;
+}
+.ProfilePanel-fieldError {
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: tomato;
+}
+.ProfilePanel-input {
+  display: block;
+  padding: 10px 7px;
+  border-radius: 3px;
+  background-color: #f0f0f0;
+  border: 1px solid #dbdbdb;
+  font-size: 0.8rem;
+  width: 95%;
+}
+
+.button {
+  padding: 5px 12px;
+  background-color: #fafafa;
+  color: #262626;
+  font-size: 0.9em;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 100px;
+}
+.button:focus {
+  outline: none;
+}
+.button.is-primary {
+  color: #ffffff;
+  background-color: #6bb1d6;
+  border-color: #6bb1d6;
+}
+.button.is-fullwidth {
+  width: 50%;
+}
+
+/*# sourceMappingURL=ProfilePanel.css.map */

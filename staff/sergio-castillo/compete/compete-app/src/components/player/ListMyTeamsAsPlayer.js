@@ -11,7 +11,7 @@ class listMyTeamsAsPlayer extends Component {
         refresh: ""
     }
 
-    componentDidMount() {
+    componentDidMount() { // No será componentWillMount como en React Native??
         this.props.handleListMyTeamsAsPlayer()
             .then(({ teams }) => {
                 this.setState({ teams })

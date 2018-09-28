@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
+import './TeamList.css'
 
 class TeamsList extends Component {
     state = {
@@ -35,15 +36,23 @@ class TeamsList extends Component {
     }
 
     render() {
-        return <div>
-            <div className="col-3"></div>
-            <div className="col-6" style={{width: '100%' , margin: '50px auto 100px auto'}}>
-                <ul style={{listStyle: 'none', textAlign: 'center'}}>
-                    {this.state.teams.map(team => <li key={team._id}> {team.name} {team.description} {this.state.role === 'organizer' && <a href="" onClick={(e) => this.handleRemoveTeamFromTournament(e, team._id)}>[remove team from tournament]</a>}</li>)}
-                </ul>
+
+        return <aside className="ListMyTeams">
+            <div className="ListMyTeams-title-wraper">
+                <h3 className="ListMyTeams-title">Teams at tournament</h3>
             </div>
-            <div className="col-3"></div>
-        </div>
+            <div className="ListMyTeams-field">
+                {
+                    this.state.teams.map(team =>
+                        <div className="ListMyTeams-input">
+                            <a href="" className="ListMyTeams-input-text">{team.name}</a>
+                            {this.state.role==='organizer' && <a href="#" className="ListMyTeams-input-delete" onClick={(e) => this.handleRemoveTeamFromTournament(e, team._id)}>[x]</a>}
+                        </div>
+                    )
+                }
+
+            </div>
+        </aside>
     }
 }
 export default withRouter(TeamsList)

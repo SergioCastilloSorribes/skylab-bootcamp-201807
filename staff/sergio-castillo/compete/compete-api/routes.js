@@ -5,10 +5,11 @@ const bodyParser = require('body-parser')
 const { logic, LogicError } = require('./logic')
 const jwt = require('jsonwebtoken')
 const validateJwt = require('./helpers/validate-jwt')
+const jsonBodyParser = bodyParser.json({limit: '10mb'});
 
 const router = express.Router()
 
-const jsonBodyParser = bodyParser.json()
+// const jsonBodyParser = bodyParser.json()
 
 // USER ROUTES
 
@@ -417,5 +418,18 @@ router.post('/user/:id/tournament/:tournamentId/match/:matchId/addresult', [vali
             res.status(err instanceof LogicError ? 400 : 500).json({ message })
         })
 })
+
+// Add photo to Cloudinary
+
+router.patch('/upload', jsonBodyParser, (req, res) => {
+    const { body: { base64Image } } = req;
+  
+    return logic._saveImage(base64Image)
+      .then(photo => res.status(200).json({ status: 'OK', photo }))
+      .catch((err) => {
+        const { message } = err;
+        res.status(err instanceof LogicError ? 400 : 500).json({ message });
+      });
+  }); 
 
 module.exports = router

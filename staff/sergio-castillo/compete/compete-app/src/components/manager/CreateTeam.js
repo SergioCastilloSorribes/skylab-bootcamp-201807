@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import Error from '../Error'
+import './CreateTeam.css'
 
 
 class CreateTeam extends Component {
@@ -10,8 +12,11 @@ class CreateTeam extends Component {
         token: sessionStorage.getItem('token') || '',
         player: sessionStorage.getItem('manager'),
         name: "",
+        teamNameError: "",
         description: "",
+        descriptionError: "",
         owner: "",
+        ownerError:""
     }
 
     handleChange = (e) => {
@@ -21,7 +26,7 @@ class CreateTeam extends Component {
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = (e) => { // Falta hacer un control de errores
         e.preventDefault()
         const { id, token, name, description, owner } = this.state
         this.props.handleCreateTeam(id, token, name, description, owner)
@@ -29,30 +34,41 @@ class CreateTeam extends Component {
 
     render() {
 
-        return <div className="container">
-            <div className="row">
-                <div className="col-3"></div>
-                <div className="col-6">
-                    <h3>CREATE TEAM</h3>
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <label className="text-color" for="exampleFormControlInput1">Name</label>
-                            <input autoFocus type="string" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="name" placeholder="Introduce the name of the team" />
-                        </div>
-                        <div className="form-group">
-                            <label className="text-color" for="exampleFormControlInput1">Description</label>
-                            <input type="string" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="description" placeholder="Description" />
-                        </div>
-                        <div className="form-group">
-                            <label className="text-color" for="exampleFormControlInput1">Owner</label>
-                            <input type="string" onChange={this.handleChange} className="form-control" id="exampleFormControlInput1" name="owner" placeholder="Introduce the name of the owner" />
-                        </div>
-                        <button type="submit" className="btn btn-primary">Create team</button>
-                    </form>
-                </div>
-                <div className="col-3"></div>
+        return <section className="CreateTeam">
+            <div className="CreateTeam-title-wraper">
+                <h3 className="CreateTeam-title">Create team</h3>
             </div>
-        </div>
+            <form className="CreateTeam-form" onSubmit={this.handleSubmit}>
+                <div className="CreateTeam-field">
+                    <input type="text" className="CreateTeam-input" name="name" placeholder="Introduce your team name" id="teamname" onChange={this.handleChange} />
+                    {
+                        this.state.teamNameError &&
+                        <div className="CreateTeam-fieldError">{this.state.teamNameError}</div>
+                    }
+                </div>
+                <div className="CreateTeam-field">
+                    <input type="text" className="CreateTeam-input" name="description" placeholder="Introduce a short description" id="description" onChange={this.handleChange} />
+                    {
+                        this.state.descriptionError &&
+                        <div className="CreateTeam-fieldError">{this.state.descriptionError}</div>
+                    }
+                </div>
+                <div className="CreateTeam-field">
+                    <input type="text" className="CreateTeam-input" name="owner" placeholder="Introduce the name of the owner" id="owner" onChange={this.handleChange} />
+                    {
+                        this.state.ownerError &&
+                        <div className="CreateTeam-fieldError">{this.state.ownerError}</div>
+                    }
+                </div>
+
+                <button type="submit" className="button is-primary is-fullwidth">Create team</button>
+                <div className="CreateTeam-field">
+                    {
+                        this.props.message && <Error message={this.props.message} />
+                    }
+                </div>
+            </form>
+        </section>
 
     }
 

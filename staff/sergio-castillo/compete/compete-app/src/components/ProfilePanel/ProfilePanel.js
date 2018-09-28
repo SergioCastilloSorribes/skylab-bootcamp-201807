@@ -1,109 +1,100 @@
 import React, { Component } from 'react'
-import './ProfilePanel.sass'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-// TODO: define env variables
-const DEFAULT_AVATAR = 'https://goo.gl/F65XTo'
+import './ProfilePanel.css'
+import Error from '../Error'
 
 class ProfilePanel extends Component {
-
-    handleEditClick = event => {
-        event.preventDefault()
-
-        this.props.onEditProfileClick()
+    state = {
+        password: "",
+        confirmPassword: "",
+        passwordError: '',
+        confirmPasswordError: '',
+        newPassword:'',
+        newPasswordError:'',
     }
 
-    handleLogoutClick = event => {
-        event.preventDefault()
-
-        this.props.onLogoutClick()
+    handleChange = event => {
+        const { name, value } = event.target
+        this.setState({
+            [name]: value
+        })
     }
 
-    handleToggleFollowClick = event => {
+    handleSubmit = event => {
         event.preventDefault()
+        const { password, confirmPassword, newPassword } = this.state
+        let isValid = true
+        this.setState({
+            passwordError: '',
+            confirmPasswordError: '',
+            newPassword:''
+        })
 
-        this.props.onToggleFollowClick()
-    }
+        if (password.length < 1) {
+            this.setState({ passwordError: `The password can't be blank` })
+            isValid = false
+        }
 
-    _renderProfileActions = () => {
-        if (this.props.isEdit) {
-            return (
-                <div>
-                    <button
-                        className="Profile-button button"
-                        onClick={this.handleEditClick}
-                    >
-                        Edit profile
-          </button>
-                    <button
-                        className="Profile-buttonLogout button"
-                        onClick={this.handleLogoutClick}
-                        title="Logout"
-                    >
-                        {/* <FontAwesomeIcon icon={['fas', 'sign-out-alt']} /> */}
-                    </button>
-                </div>
-            )
-        } else {
-            if (this.props.isFollowing) {
-                return (
-                    <button
-                        className="Profile-button button"
-                        onClick={this.handleToggleFollowClick}
-                    >
-                        Following
-          </button>
-                )
-            } else {
-                return (
-                    <button
-                        className="Profile-button button is-primary"
-                        onClick={this.handleToggleFollowClick}
-                    >
-                        Follow
-          </button>
-                )
-            }
+        if (confirmPassword.length < 1) {
+            this.setState({ confirmPasswordError: `The password can't be blank` })
+            isValid = false
+        }
+
+        if (password !== confirmPassword) {
+            this.setState({ confirmPasswordError: 'Both passwords must be equals' })
+            isValid = false
+        }
+
+        if (newPassword.length < 1) {
+            this.setState({ newPasswordError: `The new password can't be blank` })
+            isValid = false
+        }
+
+        if (isValid) {
+            this.props.handleUpdatePassword(password, newPassword)
+            this.setState({
+                passwordError: '',
+                confirmPasswordError: '',
+                newPassword:''
+            })
         }
     }
 
     render() {
-        const { user, stats } = this.props
         return (
-            <section className="Profile">
-                <div className="Profile-avatarWrapper">
-                    <img
-                        src={user.imageUrl ? user.imageUrl : DEFAULT_AVATAR}
-                        className="Profile-avatarImage"
-                        alt={user.username}
-                    />
+            <section className="ProfilePanel">
+                <div className="ProfilePanel-title-wraper">
+                    <h3 className="ProfilePanel-title">Change password</h3>
                 </div>
-                <div className="Profile-detailWrapper">
-                    <div className="Profile-detailHeader">
-                        <h1 className="Profile-username">{user.username}</h1>
-                        <div className="Profile-actions">
-                            {this._renderProfileActions()}
-                        </div>
+                <form className="ProfilePanel-form" onSubmit={this.handleSubmit}>
+                    <div className="ProfilePanel-field">
+                        <input type="password" className="ProfilePanel-input" name="password" placeholder="Password" id="passwordprofile" onChange={this.handleChange} />
+                        {
+                            this.state.passwordError &&
+                            <div className="Register-fieldError">{this.state.emailError}</div>
+                        }
                     </div>
-                    <div className="Profile-counters">
-                        <div className="Profile-counter">
-                            <strong>{stats.posts}</strong> posts
-            </div>
-                        <div className="Profile-counter">
-                            <strong>{stats.followers}</strong> followers
-            </div>
-                        <div className="Profile-counter">
-                            <strong>{stats.followings}</strong> followings
-            </div>
+                    <div className="ProfilePanel-field">
+                        <input type="password" className="ProfilePanel-input" name="confirmPassword" placeholder="Repeat Password" id="repeatpassword" onChange={this.handleChange} />
+                        {
+                            this.state.confirmPasswordError &&
+                            <div className="ProfilePanel-fieldError">{this.state.confirmPasswordError}</div>
+                        }
                     </div>
-                    <h2 className="Profile-name">{user.name}</h2>
-                    <div className="Profile-biography">{user.biography}</div>
-                    {user.website && (
-                        <div className="Profile-website">
-                            <a href={user.website} target="_blank" className="Profile-websiteLink">{user.website}</a>
-                        </div>
-                    )}
-                </div>
+                    <div className="ProfilePanel-field">
+                        <input type="password" className="ProfilePanel-input" name="newPassword" placeholder="New Password" id="newpassword" onChange={this.handleChange} />
+                        {
+                            this.state.newPasswordError &&
+                            <div className="ProfilePanel-fieldError">{this.state.newPasswordError}</div>
+                        }
+                    </div>
+                    <button type="submit" className="button is-primary is-fullwidth">Change Password</button>
+                    {
+                        this.props.message && <Error message={this.props.message} />
+                    }
+                    {
+                        this.props.passwordUpdated && <Error message={this.props.passwordUpdated} />
+                    }
+                </form>
             </section>
         )
     }

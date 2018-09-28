@@ -1,4 +1,79 @@
-ul{
+.snip1559 {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin: 8px;
+  min-width: 250px;
+  max-width: 350px;
+  width: 20em;
+  height: 35em;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  color: #3C3B3D;
+  text-align: center;
+  border-radius: 0.5em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.snip1559 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.snip1559 .profile-image {
+  padding: 15% 10% 0;
+}
+
+.snip1559 .profile-image img {
+    width: 7em;
+    height: 7em;
+    border-radius: 3.5em;
+}
+
+.snip1559 figcaption {
+  padding: 5% 10% 15%;
+}
+
+.snip1559 h3 {
+  text-transform: uppercase;
+  color: #3C3B3D;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 3px 0;
+}
+
+.snip1559 h5 {
+    text-transform: uppercase;
+    color: #3C3B3D;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 3px 0;
+}
+
+.snip1559 .icons i {
+  color: #999;
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 1.5em;
+}
+
+.snip1559 .icons i:hover {
+  color: #555;
+}
+
+.snip1559 .icons i a {
+  text-decoration: none;
+}
+
+
+
+
+
+/* ul{
     padding-left: 0;
 }
 
@@ -27,4 +102,4 @@ ul{
     font-size: 20px;
     margin: 0;
     padding: 0;
-}
+} */

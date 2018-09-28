@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
+import './Winner.css'
 
 
 class Winner extends Component {
@@ -28,17 +29,14 @@ class Winner extends Component {
 
     render() {
 
-        return<div className="container">
-            <div className="row">
-            <div className="col-3"></div>
-            <div className="col-6">
-            <h3>CONGRATULATIONS {this.state.team.name}</h3>
+        return<aside className="Winner">
+            <div className="Matches-title-wraper">
+                <span className="congrats">CONGRATULATIONS</span>
+                <h3 className="Matches-title color">{this.state.team.name}</h3>
+            </div>
             <span>{this.state.team.description}</span>
             {/* <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} /> */}
-            </div>
-            <div className="col-3"></div>
-            </div>
-        </div>
+        </aside>
     }
 }
 export default withRouter(Winner)

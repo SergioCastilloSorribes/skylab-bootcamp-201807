@@ -1,6 +1,75 @@
-/* *{
-  background-color: #f0f0f0;
+/* html {
+  margin: 0 auto;
 } */
+body{
+  background-color: #F5F7FA;
+  margin: 0 auto;
+}
 .App {
     text-align: center;
+    font-family: 'Montserrat';
+    padding: 0;
 }
+
+/* Typography */
+
+h1, h2, h3, h4, h5, h6 {
+  color: #fff;
+  margin: 0 0 .75em 0;
+  font-weight: 700;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 42px;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 36px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 28px;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+h5 {
+  font-size: 22px;
+  font-style: italic;
+  text-transform: none;
+}
+
+h6 {
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 2em;
+  line-height: 26px;
+  font-size: normal;
+}
+
+/* Links */
+a {
+  color: #6bb1d6;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #4586a9;
+  text-decoration: none;
+  outline: none;
+} 
+

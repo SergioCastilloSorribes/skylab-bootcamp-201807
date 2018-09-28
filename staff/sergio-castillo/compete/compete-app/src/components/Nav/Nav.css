@@ -1,0 +1,19 @@
+.Nav {
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #dbdbdb;
+    z-index: 5;
+    position: relative;
+    height: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Nav-button {
+    background-color: transparent;
+	border: 1px solid #d0d0d0;
+    color: #dbdbdb;
+}
+
+

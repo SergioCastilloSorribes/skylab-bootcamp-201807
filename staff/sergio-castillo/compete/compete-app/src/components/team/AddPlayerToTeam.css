@@ -1,0 +1,87 @@
+.AddPlayerToTeam {
+    max-width: 350px;
+    margin: 0 auto;
+    margin-top: 2em;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 30px 40px 40px;
+    margin-bottom: 15px;
+    border-radius: 0.5em;
+    width: 350px;
+  }
+  .ListMyTeams-title {
+    color: #3c3b3d;
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  .ListMyTeams-formError {
+    font-size: 0.8em;
+    margin-top: 15px;
+    color: tomato;
+  }
+  .ListMyTeams-field {
+    margin-bottom: 8px;
+  }
+  .ListMyTeams-fieldError {
+    font-size: 0.8em;
+    margin-top: 5px;
+    color: tomato;
+  }
+  .ListMyTeams-input {
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 10px 7px;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+    border: 1px solid #dbdbdb;
+    font-size: 0.8rem;
+    width: 95%;
+    margin-bottom: 0.7em;
+  }
+
+  .ListMyTeams-input-text{
+    color: #3C3B3D;
+    text-transform: uppercase;
+  }
+
+  .ListMyTeams-input-text:hover{
+    color: #6bb1d6;
+  }
+
+  .ListMyTeams-input-delete{
+    color: #3C3B3D;
+  }
+  .ListMyTeams-input-delete:hover{
+    color: tomato;
+  }
+
+  img.ListMyTeams-input-photo {
+    width: 3em;
+    height: 3em;
+    border-radius: 1.5em;
+    
+  }
+  
+  .listallplayers {
+    padding: 5px 12px;
+    background-color: #fafafa;
+    color: #262626;
+    font-size: 0.9em;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 100px;
+    margin-bottom: 1em;
+  }
+  .listallplayers:focus {
+    outline: none;
+  }
+  .listallplayers.is-primary {
+    color: #ffffff;
+    background-color: #6bb1d6;
+    border-color: #6bb1d6;
+  }
+  .listallplayers.is-fullwidth {
+    width: 50%;
+  }
+  

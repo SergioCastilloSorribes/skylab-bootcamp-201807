@@ -30,13 +30,13 @@ class ListMyTeams extends Component {
                     teams
                 })
             })
-            .catch(({message})=> {
-                this.setState({feedbacklist: message})
+            .catch(({ message }) => {
+                this.setState({ feedbacklist: message })
             })
     }
 
-    removeTeam = (e,teamid) => {
-        e.preventDefault()
+    handleRemoveTeam = (event, teamid) => {
+        event.preventDefault()
         this.props.handleRemoveTeam(teamid)
             .then(() => {
                 this.setState({
@@ -51,28 +51,46 @@ class ListMyTeams extends Component {
             })
     }
 
-    handleGoToTeam = (e, teamId) => {
-        e.preventDefault()
+    handleGoToTeam = (event, teamId) => {
+        event.preventDefault()
         this.props.handleGoToTeam(teamId)
     }
 
 
     render() {
 
-        return <div className="container">
-            <div className="row">
-            <div className="col-3"></div>
-            <div className="col-6" style={{margin: '0 auto 100px auto'}}>
-                <h3>MY TEAMS AS MANAGER</h3>
-                {this.state.teams.map(team =><div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{team.name}</a><button className="btn btn-danger" onClick={(e)=>this.removeTeam(e,team._id)}>x</button></div>
-                )}
-                {this.state.feedbacklist && <Error />}
-                
-                </div>
-                <div className="col-3"></div>
+        return <aside className="ListMyTeams">
+            <div className="ListMyTeams-title-wraper">
+                <h3 className="ListMyTeams-title">My teams</h3>
             </div>
-        </div>
+            <div className="ListMyTeams-field">
+            {
+                this.state.teams.map(team => 
+                    <div className="ListMyTeams-input">
+                        {/* <img className="ListMyTeams-input-logo" src="https://res.cloudinary.com/sergiocastillo/image/upload/v1538097623/Compete/Team_Logo.png" alt="Team Logo" /> */}
+                        <a href="#" className="ListMyTeams-input-text" onClick={(event) => this.handleGoToTeam(event, team._id)}>{team.name}</a>
+                        <a href="#" className="ListMyTeams-input-delete" onClick={(event)=>this.handleRemoveTeam(event,team._id)}>[x]</a>
+                    </div>
+                )
+            }
+            </div>
+        </aside>
     }
 }
+
+
+// {this.state.teams.map(team => {
+//     <div className="message-header"><a href="#" className="list-group-item list-group-item-action" onClick={(e) => this.handleGoToTeam(e, team._id)}>{team.name}</a><button className="btn btn-danger" onClick={(e)=>this.removeTeam(e,team._id)}>x</button></div>
+// }
+
+{/* <div className="ListMyTeams-input">
+    <img src="https://res.cloudinary.com/sergiocastillo/image/upload/v1538097623/Compete/Team_Logo.png" alt="Team Logo" />
+    <a href="#">Team</a>
+    <a href="#">[x]</a>
+</div>
+{
+    this.state.emailError &&
+        <div className="Register-fieldError">{this.state.emailError}</div>
+} */}
 
 export default withRouter(ListMyTeams)

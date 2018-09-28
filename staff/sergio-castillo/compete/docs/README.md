@@ -2,34 +2,50 @@
 
 **INTRODUCTION**
 
-COMPETE / GESTOR DE LIGAS Y COMPETICIONES DEPORTIVAS (Y NO TAN DEPORTIVAS)
+COMPETE / TOURNAMENT FOOTBALL MANAGER
 
-Compete es una aplicación para organizar y gestionar jugadores, equipos y torneos eliminatorios con un máximo de 32 equipos y sin necesidad de un número de equipos en base dos. La propia aplicación se encarga de gestionar cualquier número de equipos introducidos. 
-Aunque en un principio está pensada para la gestión de torneos eliminatorios de fútbol sala, creí conveniente utilizar un nombre más genérico ya que en un futuro puede hacerse cargo de diferentes modelos de torneos: de tipo deportivo (fútbol, báloncesto, tenis, ...), de tipo game (eSports) o de cualquier otro tipo que se os pueda ocurrir: la parte de Api es tan versátil que puede llegar a combinarse con otras aplicaciones: por ejemplo, una buena aplicación de ajedrez podría llegar a poder combinarse para montar ligas y torneos de ajedrez en una misma aplicación. 
 
-Esto es debido al uso de diferentes roles según las acciones del usuario.
+Compete is an application to organize and manage players, teams and knockouts tournaments with a maximum of 32 teams, and without needing a number of teams in base two: which means that the application itself is responsible for managing any number of equipment entered.
+Although originally designed for the management of football indoor qualifying tournaments, I thought it would be convenient to use a more generic name since in the future you can take charge of different tournament models: sports (football, basketball, tennis, ... ), game type eSports or any other type that you can think of: the Api part is so versatile that it can be combined with other applications: for example, a good chess application could be combined to mount leagues and chess tournaments in the same application ;).
 
-Compete gestiona tres tipos de roles de usuario: player, manager y organizer. Y aunque están vinculados de alguna manera, he conseguido desvincular en parte el modo torneo eliminatorio para en un futuro ampliar la visión global de la aplicación. 
+This is due to the use of different roles according to the user's actions.
+
+Compete manages three types of user roles: player, manager and organizer. And although they are linked in some way, I managed to partially untie the elimination tournament mode in order to expand the global vision of the application in the future and accept other tournaments modes like league or champions league.
 
 
 **TARGET** 
 
-**Compete** es capaz de llegar a todo tipo de usuarios: ya sea para gestionar un torneo de fútbol sala, que es para lo que está pensado en un principio, y/o cualquier otro tipo de torneo eliminatorio: competiciones deportivas, eSports, torneos de poker, ajedrez, 
+**Compete** 
+
+The application is able to reach all types of users: either to manage a futsal tournament, which is what it was originally intended for, and / or any other type of elimination tournament: sports competitions, eSports, poker tournaments, chess, etc.. 
 
 **TECHNOLOGIES**
 
 - Html5 and Javscript ES6. 
-- CSS and BOOTSTRAP para dar estilos.
-- Mocha para testear la lógica.
+- CSS with BEM and SASS.
+- Mocha for testing.
 - React.js
 - Node.js
+- JWT
 - Express
 - Mongodb
+- Mongoose
 
 
 **FUNCTIONAL DESCRIPTION**
 
-The user may register and/or login to search different ingredients. Then, he or she could click on each list to see the details of this nutrient. It is also possible to add them to a favorite list that can find on the nav bar.
+The LANDING is the first application's page where the user may register and/or login to start the application and apreciate the different options: at this point we need a valid email and password.
+
+The HOME is the principal page where you can see a little news viewer, the profile panel and the navigation bar with three principal options: Player, Manager and Organizer.
+
+In the PROFILE panel the user can change the password or remove the account.
+
+The PLAYER section allows the user to be a football player. He only needs to complete the form: dni, name, surname, age, weight, height, gender, position, squad number and photography. Then, you are in the other page where you can see the player information and the teams where he is playing in. The user can remove him as a player.
+
+The MANAGER sections allows the user to create, manage and remove a team. You can access to the TEAM page and add or remove players to the team.
+
+The ORGANIZER sections allows the user to create, manage and remove a tournament. You can access to the TOURNAMENT page and add or remove teams to the tournament. Whe the tournament is ready to start the organizer access to the Tournament Informations where he can see the matches of the round and add results.
+
 
 #### UML Diagram about functional description
 
@@ -37,33 +53,20 @@ Use Case Diagram:
 
 ![UseCasesDiagram](images/usecasesdiagram.png)
 
-Flow Diagram:
-
-![FlowDiagram](images/flowdiagram.png)
-
 
 **TECHNICAL DESCRIPTION**
 
-We can see in the diagrams below the flow of the app.
+Architecture:
+
+![architecture](images/architecture.png)
 
 
 #### UML Diagram about technical description
-
-Block Diagram:
-
-![BlockDiagram](images/blockdiagram.png)
-
-Components Diagram:
-
-![ComponentsDiagram](images/componentsdiagram.png)
 
 Data Model Diagram:
 
 ![DataModelDiagram](images/datamodeldiagram.png)
 
-Classes Diagram:
-
-![ClassDiagram](images/classdiagram.png)
 
 **DESIGN**
 
@@ -71,35 +74,33 @@ Classes Diagram:
 
 ![Landing](design/landing.png)
 
-#### SingUp / LogIn
+#### Home 
 
-![RegisterUser](design/signup_login.png)
-
-![RegisterUserError](design/signup_login_error.png)
-
-#### Home / Search Panel
-
-![HomeSearch](design/home_search.png)
+![home](design/home.png)
 
 #### Profile
 
-![UpdateDelete](design/update_delete.png)
+![profile](design/profile.png)
 
-![UpdateDelete](design/update_delete_error.png)
+#### Player
 
-#### Ingredients List
+![player](design/player.png)
 
-![IngredientsList](design/ingredients_list.png)
+#### Manager
 
-#### Ingredient Information
+![manager](design/manager.png)
 
-![ProductPanel](design/product_panel.png)
+#### Organizer
 
-![ProductPanel](design/product_panel_like.png)
+![organizer](design/organizer.png)
 
-#### Favorite List
+#### Team
 
-![FavoriteList](design/favorite_list.png)
+![team](design/team.png)
+
+#### Tournament
+
+![tournament](design/tournament.png)
 
 
 **AUTHOR**
