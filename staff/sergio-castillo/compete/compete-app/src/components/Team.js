@@ -4,6 +4,7 @@ import Squad from './team/Squad'
 import AddPlayerToTeam from './team/AddPlayerToTeam'
 import logic from '../logic'
 import './Team.css'
+import Error from './Error'
 
 
 class Team extends Component {
@@ -60,6 +61,9 @@ class Team extends Component {
             <div className="Team">
                 <AddPlayerToTeam handleAddPlayerToTeam={this.handleAddPlayerToTeam}/>
                 <Squad handleListPlayersFromTeam={this.handleListPlayersFromTeam} />
+                {this.state.addPlayerToTeamError && <Error message={this.state.addPlayerToTeamError}/>}
+                {this.state.listPlayersError && <Error message={this.state.listPlayersError}/>}
+
             </div>
         </article>
     }

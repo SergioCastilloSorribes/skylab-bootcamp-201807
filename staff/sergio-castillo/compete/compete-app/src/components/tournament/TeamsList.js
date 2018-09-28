@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
 import './TeamList.css'
+import Error from '../Error'
 
 class TeamsList extends Component {
     state = {
@@ -13,7 +14,8 @@ class TeamsList extends Component {
         role: sessionStorage.getItem('role'),
         tournamentId: sessionStorage.getItem('tournamentId'),
         tournament: [],
-        teams: []
+        teams: [],
+        feedback:''
     }
 
     componentDidMount() {
@@ -33,6 +35,7 @@ class TeamsList extends Component {
     handleRemoveTeamFromTournament = (e, teamId) => {
         e.preventDefault()
         logic.removeTeamFromTournament(this.state.id, this.state.token, this.state.tournamentId, teamId)
+            .catch(({message})=>this.setState({ feedback: message }))
     }
 
     render() {
@@ -50,7 +53,7 @@ class TeamsList extends Component {
                         </div>
                     )
                 }
-
+                {this.state.feedback && <Error message={this.state.feedback} />}
             </div>
         </aside>
     }

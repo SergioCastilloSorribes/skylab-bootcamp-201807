@@ -75,19 +75,16 @@ class Tournament extends Component {
     }
 
     handleCreateNewRound = () => {
-        debugger
         logic.createNewRound(this.state.id, this.state.token, this.state.tournamentId)
             .then(() => {
-                debugger
                 this.props.handleRetrieveTournament()
                     .then(tournament => {
-                        debugger
                         this.setState({ tournament }, () => {
                             this.handleListMatches()
                         })
                     })
                     .catch(({ message }) => {
-                        console.log(message)
+                        this.setState({ feedback: message })
                     })
             })
     }
@@ -97,6 +94,7 @@ class Tournament extends Component {
             .then(({ matchData }) => {
                 this.setState({ matches: matchData })
             })
+            .catch(({message})=> this.setState({ feedback: message }))
     }
 
     handleAddResult = (matchId, goalsFirstTeam, goalsSecondTeam) => {

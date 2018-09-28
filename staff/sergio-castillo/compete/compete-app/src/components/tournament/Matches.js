@@ -55,27 +55,6 @@ class Matches extends Component {
 
             </div>
         </aside>
-
-        // return <article className="Matches">
-        //     <div className="row">
-        //         <div className="col-3"></div>
-        //         <div className="col-6">
-        //             <h3>MATCHES: ROUND</h3>
-                    // {this.props.matches && this.props.matches.length > 0 && this.props.matches.map(match => 
-                    //     <div className="message-header">
-                            // <a href="#" className="list-group-item list-group-item-action">{match.team1name} {match.goalsTeam1} - {match.goalsTeam2}{match.team2name}</a>
-                            // {!match.goalsTeam1 && <form>
-                            //     <input type="number" name="goalsTeam1" className="form-control" placeholder="Goals team 1" onChange={this.handleChange} />
-                            //     <input type="number" name="goalsTeam2" className="form-control" placeholder="Goals team 2" onChange={this.handleChange} />
-                            // {!match.goalsTeam1 && <button className="btn btn-primary" onClick={(e) => this.handleAddResult(e, match.matchId)}>Add</button>}
-                            // </form>}
-                    //     </div>
-        //             )}
-
-        //         </div>
-        //         <div className="col-3"></div>
-        //     </div>
-        // </article>
     }
 }
 export default withRouter(Matches)

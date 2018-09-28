@@ -55,7 +55,7 @@ class Squad extends Component {
                         </div>
                     )
                 }
-
+                {this.state.removePlayerError && <Error message={this.state.removePlayerError}/>}
             </div>
         </aside>
     }
