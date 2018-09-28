@@ -942,7 +942,7 @@ const logic = {
 
                     const [i1, i2] = this._random(winners)
 
-                    return Promise.all(match.map(ele => logic.createNewMatch(id, tournamentId, i1, i2))).then(() => true)
+                    return Promise.all(match.map(() => logic.createNewMatch(id, tournamentId, i1, i2))).then(() => true)
                 }
             })
 
@@ -1031,7 +1031,7 @@ const logic = {
                 this._validateIdField(matchId)
                 this._validateNumberField('goals team 1', goalsFirstTeam)
                 this._validateNumberField('goals team 2', goalsSecondTeam)
-                if (goalsFirstTeam === goalsSecondTeam) throw new LogicError('One match does not finish on draw')
+                if (goalsFirstTeam === goalsSecondTeam) throw new LogicError('Draw is not valid in a knockout tournament')
                 return User.findOne({ '_id': id })
             })
             .then(user => {
@@ -1058,8 +1058,9 @@ const logic = {
             })
             .then(result => {
                 resultId = result.id
-                if (goalsFirstTeam > goalsSecondTeam) winnerTeam = firstTeamId
-                else winnerTeam = secondTeamId
+                if (goalsFirstTeam > goalsSecondTeam) {
+                    winnerTeam = firstTeamId
+                }else {winnerTeam = secondTeamId}
                 return Match.findOne({ '_id': matchId })
             })
             .then(match => {
@@ -1069,7 +1070,6 @@ const logic = {
             })
             .then(tournament => {
                 tournament.roundMatches = tournament.roundMatches - 1
-                debugger
                 tournament.winners.push(winnerTeam.toString())
                 if (tournament.winners.length === 1 && tournament.roundMatches === 0) {
                     tournament.state = 'finish'

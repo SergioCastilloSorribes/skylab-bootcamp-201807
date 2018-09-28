@@ -75,10 +75,13 @@ class Tournament extends Component {
     }
 
     handleCreateNewRound = () => {
+        debugger
         logic.createNewRound(this.state.id, this.state.token, this.state.tournamentId)
             .then(() => {
+                debugger
                 this.props.handleRetrieveTournament()
                     .then(tournament => {
+                        debugger
                         this.setState({ tournament }, () => {
                             this.handleListMatches()
                         })
